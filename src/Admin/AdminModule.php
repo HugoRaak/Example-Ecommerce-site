@@ -11,7 +11,7 @@ use Framework\Router;
 
 final class AdminModule extends Module
 {
-    protected const DEFINITIONS = __DIR__ . '/config.php';
+    public const DEFINITIONS = __DIR__ . '/config.php';
 
     public function __construct(
         readonly RendererInterface $renderer,

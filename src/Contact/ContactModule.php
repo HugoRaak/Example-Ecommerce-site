@@ -11,7 +11,7 @@ use Psr\Container\ContainerInterface;
 
 final class ContactModule extends Module
 {
-    protected const DEFINITIONS = __DIR__ . '/config.php';
+    public const DEFINITIONS = __DIR__ . '/config.php';
 
     public function __construct(readonly ContainerInterface $container)
     {

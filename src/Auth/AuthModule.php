@@ -15,11 +15,11 @@ use Psr\Container\ContainerInterface;
 
 final class AuthModule extends Module
 {
-    protected const DEFINITIONS = __DIR__ . '/config.php';
+    public const DEFINITIONS = __DIR__ . '/config.php';
 
-    protected const MIGRATIONS = __DIR__ . '/db/migrations';
+    public const MIGRATIONS = __DIR__ . '/db/migrations';
 
-    protected const SEEDS = __DIR__ . '/db/seeds';
+    public const SEEDS = __DIR__ . '/db/seeds';
 
     public function __construct(readonly ContainerInterface $container)
     {

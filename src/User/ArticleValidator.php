@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace App\User;
 
 use Framework\Database\Table\ArticleTable;
@@ -97,7 +100,8 @@ final class ArticleValidator extends Validator
     private function extension(array $files = [], array $extensions = []): bool
     {
         foreach ($files as $file) {
-            if ($file instanceof \Psr\Http\Message\UploadedFileInterface &&
+            if (
+                $file instanceof \Psr\Http\Message\UploadedFileInterface &&
                 $file->getError() === UPLOAD_ERR_OK &&
                 $file->getClientFilename() !== ''
             ) {

@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace App\Article\Actions;
 
 use Framework\Database\Table\ArticleTable;
@@ -9,7 +12,6 @@ use Psr\Container\ContainerInterface;
 
 final readonly class ArticleAction
 {
-
     public function __construct(
         private RendererInterface $renderer,
         private ArticleTable $articleTable,

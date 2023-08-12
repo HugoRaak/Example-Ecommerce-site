@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace App\Auth\Database\Entity;
 
 use Framework\Database\Entity\Entity;
@@ -9,7 +12,7 @@ final class Role extends Entity
 
     private ?string $name = null;
 
-    protected function getId() : ?int
+    protected function getId(): ?int
     {
         return $this->id;
     }

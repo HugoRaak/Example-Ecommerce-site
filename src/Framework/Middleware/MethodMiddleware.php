@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Framework\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
@@ -15,7 +18,8 @@ final class MethodMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $parsedBody = is_array($request->getParsedBody()) ? $request->getParsedBody() : [];
-        if (array_key_exists('_method', $parsedBody) &&
+        if (
+            array_key_exists('_method', $parsedBody) &&
             in_array($parsedBody['_method'], ['DELETE', 'PUT'])
         ) {
             $request = $request->withMethod($parsedBody['_method']);

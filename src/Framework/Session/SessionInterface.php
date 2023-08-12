@@ -1,4 +1,5 @@
 <?php
+
 namespace Framework\Session;
 
 interface SessionInterface

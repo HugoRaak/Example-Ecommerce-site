@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Framework\Twig;
 
 use ParagonIE\AntiCSRF\AntiCSRF;
@@ -21,7 +24,7 @@ final class CsrfExtension extends AbstractExtension
     {
         static $csrf;
         if ($csrf === null) {
-            $csrf = new AntiCSRF;
+            $csrf = new AntiCSRF();
         }
         return $csrf->insertToken($lock_to, false);
     }

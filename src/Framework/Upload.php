@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Framework;
 
 use Intervention\Image\ImageManager;
@@ -71,7 +74,7 @@ abstract class Upload
      * add a suffix to a path
      *
      */
-    private function getPathSuffix(string $path, string $suffix) : ?string
+    private function getPathSuffix(string $path, string $suffix): ?string
     {
         $pathInfo = $this->isTherePathInfo(pathinfo($path));
         if ($pathInfo) {

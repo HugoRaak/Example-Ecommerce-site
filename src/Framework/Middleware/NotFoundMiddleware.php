@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Framework\Middleware;
 
 use Framework\Database\Table\NoRecordException;
@@ -18,7 +21,7 @@ final class NotFoundMiddleware implements MiddlewareInterface
     {
         try {
             return $handler->handle($request);
-        } catch (NotFoundException|NoRecordException) {
+        } catch (NotFoundException | NoRecordException) {
             return new Response(404, [], '<h1>Erreur 404</h1>');
         }
     }

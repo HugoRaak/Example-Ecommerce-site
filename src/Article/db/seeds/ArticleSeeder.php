@@ -1,16 +1,16 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Phinx\Seed\AbstractSeed;
 
 class ArticleSeeder extends AbstractSeed
 {
-
     public function run()
     {
         $data = [];
         $faker = \Faker\Factory::create('fr_FR');
-        for ($i = 0; $i< 100; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $date = $faker->dateTimeThisYear()->format('Y-m-d H:i:s');
             $data[] = [
                 'name' => $faker->name(),

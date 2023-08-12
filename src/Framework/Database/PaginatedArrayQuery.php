@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Framework\Database;
 
 use Pagerfanta\Adapter\AdapterInterface;

@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Framework\Database\Table;
 
 use Envms\FluentPDO\Queries\Select;
@@ -224,7 +227,7 @@ class Table
      * @param mixed[] $values
      *
      */
-    public function insert(array $values) : void
+    public function insert(array $values): void
     {
         $this->fpdo->insertInto($this->table, $values)->execute();
     }

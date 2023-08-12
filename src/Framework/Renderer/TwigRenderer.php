@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Framework\Renderer;
 
 final readonly class TwigRenderer implements RendererInterface

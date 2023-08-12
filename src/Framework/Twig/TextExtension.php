@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Framework\Twig;
 
 use Twig\Extension\AbstractExtension;
@@ -27,7 +30,7 @@ final class TextExtension extends AbstractExtension
         }
         $lastSpace = mb_strpos($text, ' ', $maxLenght);
         if ($lastSpace === false) {
-            return mb_substr($text, 0, $maxLenght+20);
+            return mb_substr($text, 0, $maxLenght + 20);
         }
         return mb_substr($text, 0, $lastSpace) . '...';
     }

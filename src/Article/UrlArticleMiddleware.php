@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace App\Article;
 
 use Framework\Actions\RouterAware;
@@ -14,11 +17,11 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 final readonly class UrlArticleMiddleware implements MiddlewareInterface
 {
+    use RouterAware;
+
     public function __construct(private ArticleTable $articleTable, private Router $router)
     {
     }
-
-    use RouterAware;
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

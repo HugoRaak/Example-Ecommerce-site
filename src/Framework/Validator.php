@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Framework;
 
 use Valitron\Validator as ValitronValidator;
@@ -12,8 +15,8 @@ abstract class Validator extends ValitronValidator
     public function __construct(
         readonly array $data = [],
         readonly array $fields = [],
-        readonly ?string $lang = null,
-        readonly ?string $langDir = null
+        readonly ? string $lang = null,
+        readonly ? string $langDir = null
     ) {
         self::lang('fr');
         parent::__construct($data, $fields, $lang, $langDir);

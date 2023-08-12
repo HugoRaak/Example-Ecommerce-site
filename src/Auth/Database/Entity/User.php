@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace App\Auth\Database\Entity;
 
 use Framework\Database\Entity\Entity;

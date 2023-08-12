@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace App\Contact\Actions;
 
 use App\Contact\ContactValidator;
@@ -12,9 +15,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 final class ContactAction
 {
-    private string $toEmail = 'contact@example.com';
-
     use RouterAware;
+
+    private string $toEmail = 'contact@example.com';
 
     public function __construct(
         readonly private RendererInterface $renderer,

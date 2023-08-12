@@ -17,7 +17,7 @@ final class RouterMiddleware implements MiddlewareInterface
     }
 
     /**
-     * @throws NotFoundException if there is no route corresponding to the request uri
+     * @throws \Framework\Router\NotFoundException if there is no route corresponding to the request uri
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

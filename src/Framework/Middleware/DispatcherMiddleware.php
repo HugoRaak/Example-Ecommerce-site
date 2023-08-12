@@ -19,7 +19,7 @@ final class DispatcherMiddleware implements MiddlewareInterface
     }
 
     /**
-     * @throws Exception if $response is not a instance of ResponseInterface
+     * @throws \Exception if $response is not a instance of ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

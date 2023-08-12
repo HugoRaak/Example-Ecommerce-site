@@ -65,7 +65,7 @@ final class App implements RequestHandlerInterface
      *
      * @return ResponseInterface
      * 
-     * @throws Exception if there is no more middleware to process
+     * @throws \Exception if there is no more middleware to process
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -82,7 +82,7 @@ final class App implements RequestHandlerInterface
      *
      * @return ResponseInterface|\Exception
      * 
-     * @throws Exception if there is no container
+     * @throws \Exception if there is no container
      */
     public function run(ServerRequestInterface $request): ResponseInterface|\Exception
     {

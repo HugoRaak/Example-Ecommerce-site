@@ -65,7 +65,7 @@ class Entity
     {
         /** @var \ReflectionNamedType $propertyType */
         $propertyType = (new \ReflectionProperty($entity, $key))->getType();
-        if ($propertyType !== null) {
+        if ($propertyType instanceof \ReflectionNamedType) {
             $typeName = $propertyType->getName();
             if ($typeName === 'int') {
                 $value = (int)$value;

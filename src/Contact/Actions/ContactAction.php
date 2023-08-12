@@ -49,7 +49,7 @@ final class ContactAction
             }
             $mailInfo->hydrate($params);
         }
-        return $this->renderer->render('@contact/form', compact('mailInfo', 'errors'));
+        return $this->renderer->render('@contact/form', ['mailInfo' => $mailInfo, 'errors' => $errors]);
     }
 
     /**

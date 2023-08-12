@@ -32,7 +32,7 @@ final class LoginAction
             $params = is_array($request->getParsedBody()) ? $request->getParsedBody() : [];
             if (isset($params['username']) && isset($params['password'])) {
                 $user = $this->auth->login($params['username'], $params['password']);
-                if ($user) {
+                if ($user instanceof \App\Auth\Database\Entity\User) {
                     return new RedirectResponse($this->getRedirectUrl($user));
                 }
                 (new FlashService($this->session))->error('Le nom d\'utilisateur ou le mot de passe est incorrect');

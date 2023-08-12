@@ -77,7 +77,7 @@ final class ArticleValidator extends Validator
     private function uploaded(array $files = []): bool
     {
         foreach ($files as $file) {
-            if ($file === null || $file->getError() !== UPLOAD_ERR_OK) {
+            if (!$file instanceof \Psr\Http\Message\UploadedFileInterface || $file->getError() !== UPLOAD_ERR_OK) {
                 return false;
             }
         }
@@ -93,7 +93,10 @@ final class ArticleValidator extends Validator
     private function extension(array $files = [], array $extensions = []): bool
     {
         foreach ($files as $file) {
-            if ($file !== null && $file->getError() === UPLOAD_ERR_OK && $file->getClientFilename() !== '') {
+            if ($file instanceof \Psr\Http\Message\UploadedFileInterface &&
+                $file->getError() === UPLOAD_ERR_OK &&
+                $file->getClientFilename() !== ''
+            ) {
                 $type = $file->getClientMediaType();
                 $clientFilename = $file->getClientFilename();
                 if (!is_string($clientFilename)) {

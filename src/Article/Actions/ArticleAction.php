@@ -33,7 +33,7 @@ final class ArticleAction
     private function index(): string
     {
         $articles = $this->articleTable->findAll("created_at DESC", 12);
-        return $this->renderer->render('@article/index', compact('articles'));
+        return $this->renderer->render('@article/index', ['articles' => $articles]);
     }
 
     /**
@@ -46,6 +46,9 @@ final class ArticleAction
         $id = $article->__get('id');
         $categorie = $this->categorieTable->findFromTable('article', $id);
         $paymentActive = $this->container->has('pay.prefix');
-        return $this->renderer->render('@article/show', compact('article', 'categorie', 'paymentActive'));
+        return $this->renderer->render(
+            '@article/show',
+            ['article' => $article, 'categorie' => $categorie, 'paymentActive' => $paymentActive]
+        );
     }
 }

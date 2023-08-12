@@ -41,7 +41,7 @@ final class AdminUserAction
     {
         $users = $this->userTable->findPaginated(12, $request->getQueryParams()['p'] ?? 1);
         $roles = $this->roleTable->findList();
-        return $this->renderer->render('@auth/admin/index', compact('users', 'roles'));
+        return $this->renderer->render('@auth/admin/index', ['users' => $users, 'roles' => $roles]);
     }
 
 
@@ -65,10 +65,10 @@ final class AdminUserAction
         $params = is_array($request->getParsedBody()) ? $request->getParsedBody() : [];
         /** @var int $role_id */
         $role_id = array_key_exists('role_id', $params) ? (int)$params['role_id'] : 0;
-        if (!$role_id) {
+        if ($role_id === 0) {
             return $this->redirect('admin.user.index');
         } elseif ($this->roleTable->exists('id', $role_id)) {
-            $this->userTable->update(compact('role_id'), (int)$request->getAttribute('id'));
+            $this->userTable->update(['role_id' => $role_id], (int)$request->getAttribute('id'));
             $this->flash->success('Le role a bien été modifié');
             return $this->redirect('admin.user.index');
         }

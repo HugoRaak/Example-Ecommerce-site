@@ -47,7 +47,7 @@ final class App implements RequestHandlerInterface
      */
     public function pipe(string $middleware, ?array $routePrefix = []): self
     {
-        if (!empty($routePrefix)) {
+        if ($routePrefix !== null && $routePrefix !== []) {
             $this->middlewares[] = new RoutePrefixMiddleware($this->getContainer(), $routePrefix, $middleware);
         } else {
             $this->middlewares[] = $middleware;
@@ -64,7 +64,7 @@ final class App implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $middleware = $this->getMiddleware();
-        if ($middleware === null) {
+        if (!$middleware instanceof \Psr\Http\Server\MiddlewareInterface) {
             throw new \Exception('Aucun middleware n\'a intercepté cette requête');
         }
         return $middleware->process($request, $this);
@@ -79,7 +79,7 @@ final class App implements RequestHandlerInterface
     public function run(ServerRequestInterface $request): ResponseInterface|\Exception
     {
         $this->getContainer()->get(Router::class)->addMatchTypes('slug', '[a-z0-9-]+');
-        if ($this->container) {
+        if ($this->container instanceof \Psr\Container\ContainerInterface) {
             foreach ($this->modules as $module) {
                 $this->container->get($module);
             }
@@ -93,7 +93,7 @@ final class App implements RequestHandlerInterface
      */
     public function getContainer(): ContainerInterface
     {
-        if ($this->container === null) {
+        if (!$this->container instanceof \Psr\Container\ContainerInterface) {
             $builder = new \DI\ContainerBuilder();
             $env = $_ENV['ENV'] ?: 'production';
             if ($env === 'production') {

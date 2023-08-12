@@ -42,7 +42,7 @@ final class ArticleBrowseAction
     {
         $params =  $request->getQueryParams();
         $articles = $this->articleTable->findPaginated(12, (int)($params['p'] ?? 1));
-        return $this->renderer->render('@article/browse', $this->getRenderParams(compact('articles'), '.index'));
+        return $this->renderer->render('@article/browse', $this->getRenderParams(['articles' => $articles], '.index'));
     }
 
     /**
@@ -61,7 +61,7 @@ final class ArticleBrowseAction
         );
         return $this->renderer->render(
             '@article/browse',
-            $this->getRenderParams(compact('articles', 'slug'), '.categorie')
+            $this->getRenderParams(['articles' => $articles, 'slug' => $slug], '.categorie')
         );
     }
 
@@ -89,7 +89,7 @@ final class ArticleBrowseAction
         );
         return $this->renderer->render(
             '@article/browse',
-            $this->getRenderParams(compact('articles', 'slug'), '.search')
+            $this->getRenderParams(['articles' => $articles, 'slug' => $slug], '.search')
         );
     }
 
@@ -102,6 +102,6 @@ final class ArticleBrowseAction
     private function getRenderParams(array $params, string $routeSuffix): array
     {
         $categories = $this->categorieTable->findAll('name DESC');
-        return array_merge($params, compact('routeSuffix', 'categories'));
+        return array_merge($params, ['routeSuffix' => $routeSuffix, 'categories' => $categories]);
     }
 }

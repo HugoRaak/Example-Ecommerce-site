@@ -17,7 +17,7 @@ final class UserWidget implements AdminWidgetInterface
     public function render(): string
     {
         $countUser = $this->userTable->count();
-        return $this->renderer->render('@auth/admin/widget', compact('countUser'));
+        return $this->renderer->render('@auth/admin/widget', ['countUser' => $countUser]);
     }
 
     /**

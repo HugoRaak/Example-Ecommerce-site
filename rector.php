@@ -11,10 +11,17 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/config',
         __DIR__ . '/views',
     ]);
+    
+    //I have some problmes with rector and phpstan I didn't success to resolve them otherwise than that
+    $rectorConfig->skip([
+        __DIR__ . '\src\Framework\Database\PaginatedQuery.php',
+        __DIR__ . '\src\Framework\Database\Table\ArticleTable.php',
+        __DIR__ . '\src\Framework\Database\Table\Table.php'
+    ]);
 
     $rectorConfig->sets([
         // LevelSetList::UP_TO_PHP_82
-        // SetList::CODE_QUALITY,
+        SetList::CODE_QUALITY,
         SetList::DEAD_CODE
     ]);
 };

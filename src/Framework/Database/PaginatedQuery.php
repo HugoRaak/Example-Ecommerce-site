@@ -19,10 +19,14 @@ final class PaginatedQuery implements AdapterInterface
 
     /**
      * get the number of items
+     *
+     * @return int<0, max>
      */
     public function getNbResults(): int
     {
-        return (int)$this->countQuery->fetchColumn();
+        $nbResults = (int)$this->countQuery->fetchColumn();
+        assert($nbResults >= 0);
+        return $nbResults;
     }
 
     /**

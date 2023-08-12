@@ -22,7 +22,7 @@ final class RouterMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $route = $this->router->match($request);
-        if ($route === null) {
+        if (!$route instanceof \Framework\Router\Route) {
             throw new \Framework\Router\NotFoundException();
         }
         $params = $route->getParams();

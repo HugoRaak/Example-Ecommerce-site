@@ -50,7 +50,7 @@ final class CreateAction
             }
             $user = Entity::hydrate($user, $params);
         }
-        return $this->renderer->render('@auth/create', compact('user', 'errors'));
+        return $this->renderer->render('@auth/create', ['user' => $user, 'errors' => $errors]);
     }
 
     /**

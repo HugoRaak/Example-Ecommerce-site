@@ -47,7 +47,7 @@ final class UserCrudAction extends CrudAction
             $request->getQueryParams()['p'] ?? 1,
             $this->table->findArticleFromUser($request->getAttribute('user')->__get('id'), 'created_at DESC')
         );
-        return $this->renderer->render($this->viewPath . '/index', compact('items'));
+        return $this->renderer->render($this->viewPath . '/index', ['items' => $items]);
     }
 
     /**

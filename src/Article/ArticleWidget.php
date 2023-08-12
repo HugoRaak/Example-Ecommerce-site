@@ -22,7 +22,10 @@ final class ArticleWidget implements AdminWidgetInterface
     {
         $countArticle = $this->articleTable->count();
         $countCategorie = $this->categorieTable->count();
-        return $this->renderer->render('@article/admin/widget', compact('countArticle', 'countCategorie'));
+        return $this->renderer->render(
+            '@article/admin/widget',
+            ['countArticle' => $countArticle, 'countCategorie' => $countCategorie]
+        );
     }
 
     /**

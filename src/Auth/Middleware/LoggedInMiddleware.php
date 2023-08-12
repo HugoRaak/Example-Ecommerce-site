@@ -25,7 +25,7 @@ final class LoggedInMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $user = $this->auth->getUser();
-        if ($user === null) {
+        if (!$user instanceof \App\Auth\Database\Entity\User) {
             if (strpos($request->getUri()->getPath(), '/admin') !== false) {
                 throw new NotFoundException();
             }

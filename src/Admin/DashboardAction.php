@@ -20,6 +20,6 @@ final class DashboardAction
         $widgets = array_reduce($this->widgets, function (string $html, AdminWidgetInterface $widget) {
             return $html . $widget->render();
         }, '');
-        return $this->renderer->render('@admin/dashboard', compact('widgets'));
+        return $this->renderer->render('@admin/dashboard', ['widgets' => $widgets]);
     }
 }

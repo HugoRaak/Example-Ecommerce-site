@@ -36,7 +36,7 @@ final class PaymentAction
     {
         $article = $this->articleTable->find((int)$request->getAttribute('id'));
         $paypalButton = $this->payment->ui($article);
-        return $this->renderer->render('@auth/payment', compact('article', 'paypalButton'));
+        return $this->renderer->render('@auth/payment', ['article' => $article, 'paypalButton' => $paypalButton]);
     }
 
     /**
@@ -90,8 +90,7 @@ final class PaymentAction
     private function verifyAuthorization(string $authorizationId): bool
     {
         //TODO gestion de l'authorisation de paypal
-        if($authorizationId) return true;
-        return false;
+        return (bool) $authorizationId;
     }
 
     /**
@@ -101,7 +100,6 @@ final class PaymentAction
     private function captureFunds(string $orderId): bool
     {
         //TODO effectuer la capture du paiement
-        if($orderId) return true;
-        return false;
+        return (bool) $orderId;
     }
 }

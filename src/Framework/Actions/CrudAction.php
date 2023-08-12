@@ -59,7 +59,7 @@ abstract class CrudAction
     {
         $params =  $request->getQueryParams();
         $items = $this->table->findPaginated(12, (int)($params['p'] ?? 1));
-        return $this->renderer->render($this->viewPath . '/index', compact('items'));
+        return $this->renderer->render($this->viewPath . '/index', ['items' => $items]);
     }
 
     /**
@@ -84,7 +84,10 @@ abstract class CrudAction
             }
             $item = Entity::hydrate($item, is_array($request->getParsedBody()) ? $request->getParsedBody() : []);
         }
-        return $this->renderer->render($this->viewPath . '/edit', $this->formParams(compact('item', 'errors')));
+        return $this->renderer->render(
+            $this->viewPath . '/edit',
+            $this->formParams(['item' => $item, 'errors' => $errors])
+        );
     }
 
     /**
@@ -109,7 +112,10 @@ abstract class CrudAction
             }
             $item = Entity::hydrate($item, is_array($request->getParsedBody()) ? $request->getParsedBody() : []);
         }
-        return $this->renderer->render($this->viewPath . '/create', $this->formParams(compact('item', 'errors')));
+        return $this->renderer->render(
+            $this->viewPath . '/create',
+            $this->formParams(['item' => $item, 'errors' => $errors])
+        );
     }
 
     /**

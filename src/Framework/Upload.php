@@ -35,7 +35,7 @@ abstract class Upload
             $extension = '.' . mb_strtolower(pathinfo($clientFilename, PATHINFO_EXTENSION));
             $targetPath = $this->addCopySuffix($this->path . DIRECTORY_SEPARATOR . $filename . $extension);
             $dirname = pathinfo($targetPath, PATHINFO_DIRNAME);
-            if ($dirname) {
+            if ($dirname !== '' && $dirname !== '0') {
                 if (!file_exists($dirname)) {
                     mkdir($dirname, 777, true);
                 }
@@ -109,12 +109,10 @@ abstract class Upload
             if (file_exists($file)) {
                 unlink($file);
             }
-            foreach ($this->formats as $format => $_) {
+            foreach (array_keys($this->formats) as $format) {
                 $fileWithFormat = $this->getPathSuffix($file, $format);
-                if (is_string($fileWithFormat)) {
-                    if (file_exists($fileWithFormat)) {
-                        unlink($fileWithFormat);
-                    }
+                if (is_string($fileWithFormat) && file_exists($fileWithFormat)) {
+                    unlink($fileWithFormat);
                 }
             }
         }

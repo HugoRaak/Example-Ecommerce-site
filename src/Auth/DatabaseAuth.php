@@ -25,7 +25,7 @@ final class DatabaseAuth implements AuthInterface
      */
     public function login(string $username, string $password): ?User
     {
-        if (empty($username) || empty($password)) {
+        if ($username === '' || $password === '') {
             return null;
         }
         try {
@@ -54,7 +54,7 @@ final class DatabaseAuth implements AuthInterface
      */
     public function getUser(): ?User
     {
-        if ($this->user) {
+        if ($this->user instanceof \App\Auth\Database\Entity\User) {
             return $this->user;
         }
         $userId = $this->session->get('auth.user');
@@ -78,11 +78,7 @@ final class DatabaseAuth implements AuthInterface
     public function isAdmin(): bool
     {
         $user = $this->getUser();
-        if ($user) {
-            if ($this->roleTable->findFromTable('user', $user->__get('id'))->__get('name') === 'admin') {
-                return true;
-            }
-        }
-        return false;
+        return $user instanceof \App\Auth\Database\Entity\User &&
+               $this->roleTable->findFromTable('user', $user->__get('id'))->__get('name') === 'admin';
     }
 }

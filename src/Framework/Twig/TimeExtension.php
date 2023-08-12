@@ -8,7 +8,7 @@ final class TimeExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new \Twig\TwigFilter('ago', [$this, 'ago'], ['is_safe' => ['html']])
+            new \Twig\TwigFilter('ago', $this->ago(...), ['is_safe' => ['html']])
         ];
     }
 

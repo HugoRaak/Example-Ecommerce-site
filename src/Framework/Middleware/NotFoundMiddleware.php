@@ -18,7 +18,7 @@ final class NotFoundMiddleware implements MiddlewareInterface
     {
         try {
             return $handler->handle($request);
-        } catch (NotFoundException|NoRecordException $e) {
+        } catch (NotFoundException|NoRecordException) {
             return new Response(404, [], '<h1>Erreur 404</h1>');
         }
     }

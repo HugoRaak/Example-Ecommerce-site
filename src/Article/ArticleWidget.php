@@ -6,12 +6,12 @@ use Framework\Database\Table\ArticleTable;
 use Framework\Database\Table\CategorieTable;
 use Framework\Renderer\RendererInterface;
 
-final class ArticleWidget implements AdminWidgetInterface
+final readonly class ArticleWidget implements AdminWidgetInterface
 {
     public function __construct(
-        readonly private RendererInterface $renderer,
-        readonly private ArticleTable $articleTable,
-        readonly private CategorieTable $categorieTable
+        private RendererInterface $renderer,
+        private ArticleTable $articleTable,
+        private CategorieTable $categorieTable
     ) {
     }
 

@@ -73,9 +73,11 @@ final class UserCrudAction extends CrudAction
         $params = $request->getParsedBody() + $request->getUploadedFiles();
         $params['images'] = $this->uploadImages($params['images'], $entity);
 
-        $params = array_filter($params, function ($key) {
-            return in_array($key, ['name', 'slug', 'images','price', 'description', 'categorie_id']);
-        }, ARRAY_FILTER_USE_KEY);
+        $params = array_filter(
+            $params,
+            fn($key) => in_array($key, ['name', 'slug', 'images','price', 'description', 'categorie_id']),
+            ARRAY_FILTER_USE_KEY
+        );
         $params['price'] = ($params['price'] === 'null') ? null : (float)$params['price'];
         $params['categorie_id'] = ($params['categorie_id'] === 'null') ? null : (int)$params['categorie_id'];
         $params['updated_at'] = date('Y-m-d H:i');

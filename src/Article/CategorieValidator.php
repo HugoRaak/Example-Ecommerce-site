@@ -23,9 +23,11 @@ final class CategorieValidator extends Validator
             ->rule('required', ['name', 'slug'])
             ->rule('lengthBetween', ['name', 'slug'], 2, 40)
             ->rule('regex', 'slug', '/^[a-z0-9\-]+$/')
-            ->rule(function ($field, $value) use ($table, $id) {
-                return !$table->exists($field, $value, $id);
-            }, ['name', 'slug'], 'Cette valeur est déjà utilisé')
+            ->rule(
+                fn($field, $value) => !$table->exists($field, $value, $id),
+                ['name', 'slug'],
+                'Cette valeur est déjà utilisé'
+            )
             ->setPrependLabels(false);
     }
 }

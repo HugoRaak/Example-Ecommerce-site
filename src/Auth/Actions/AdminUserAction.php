@@ -10,16 +10,16 @@ use Framework\Session\FlashService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface;
 
-final class AdminUserAction
+final readonly class AdminUserAction
 {
     use RouterAware;
 
     public function __construct(
-        readonly private RendererInterface $renderer,
-        readonly private Router $router,
-        readonly private UserTable $userTable,
-        readonly private FlashService $flash,
-        readonly private RoleTable $roleTable
+        private RendererInterface $renderer,
+        private Router $router,
+        private UserTable $userTable,
+        private FlashService $flash,
+        private RoleTable $roleTable
     ) {
     }
 

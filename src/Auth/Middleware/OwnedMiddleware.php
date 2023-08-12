@@ -11,9 +11,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Check if the user is the owner of the article
  */
-final class OwnedMiddleware implements MiddlewareInterface
+final readonly class OwnedMiddleware implements MiddlewareInterface
 {
-    public function __construct(readonly private ArticleTable $articleTable)
+    public function __construct(private ArticleTable $articleTable)
     {
     }
 

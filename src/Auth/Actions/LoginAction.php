@@ -11,14 +11,14 @@ use Framework\Session\FlashService;
 use Framework\Session\SessionInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-final class LoginAction
+final readonly class LoginAction
 {
     public function __construct(
-        readonly private RendererInterface $renderer,
-        readonly private Router $router,
-        readonly private DatabaseAuth $auth,
-        readonly private SessionInterface $session,
-        readonly private RoleTable $roleTable
+        private RendererInterface $renderer,
+        private Router $router,
+        private DatabaseAuth $auth,
+        private SessionInterface $session,
+        private RoleTable $roleTable
     ) {
     }
 

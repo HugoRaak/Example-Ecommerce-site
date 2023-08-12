@@ -15,7 +15,7 @@ final class AdminTwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new \Twig\TwigFunction('admin_menu', [$this, 'renderMenu'], ['is_safe' => ['html']])
+            new \Twig\TwigFunction('admin_menu', $this->renderMenu(...), ['is_safe' => ['html']])
         ];
     }
 
@@ -24,8 +24,10 @@ final class AdminTwigExtension extends AbstractExtension
      */
     public function renderMenu(): string
     {
-        return array_reduce($this->widgets, function (string $html, AdminWidgetInterface $widget) {
-            return $html . $widget->renderMenu();
-        }, '');
+        return array_reduce(
+            $this->widgets,
+            fn(string $html, AdminWidgetInterface $widget) => $html . $widget->renderMenu(),
+            ''
+        );
     }
 }

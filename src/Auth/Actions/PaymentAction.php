@@ -9,12 +9,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 use function GuzzleHttp\Psr7\stream_for;
 
-final class PaymentAction
+final readonly class PaymentAction
 {
     public function __construct(
-        readonly private RendererInterface $renderer,
-        readonly private ArticleTable $articleTable,
-        readonly private PaypalPayment $payment
+        private RendererInterface $renderer,
+        private ArticleTable $articleTable,
+        private PaypalPayment $payment
     ) {
     }
 
@@ -22,7 +22,7 @@ final class PaymentAction
     {
         if ($request->getAttribute(('id'))) {
             return $this->index($request);
-        } elseif (strpos((string)$request->getUri(), 'autorisation') !== false) {
+        } elseif (str_contains((string)$request->getUri(), 'autorisation')) {
             return $this->authorization($request);
         }
         return $this->capture($request);

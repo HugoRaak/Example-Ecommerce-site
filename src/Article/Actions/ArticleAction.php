@@ -7,14 +7,14 @@ use Framework\Renderer\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Container\ContainerInterface;
 
-final class ArticleAction
+final readonly class ArticleAction
 {
 
     public function __construct(
-        readonly private RendererInterface $renderer,
-        readonly private ArticleTable $articleTable,
-        readonly private CategorieTable $categorieTable,
-        readonly private ContainerInterface $container
+        private RendererInterface $renderer,
+        private ArticleTable $articleTable,
+        private CategorieTable $categorieTable,
+        private ContainerInterface $container
     ) {
     }
 

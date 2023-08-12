@@ -12,9 +12,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Verify url to display an article
  */
-final class UrlArticleMiddleware implements MiddlewareInterface
+final readonly class UrlArticleMiddleware implements MiddlewareInterface
 {
-    public function __construct(readonly private ArticleTable $articleTable, readonly private Router $router)
+    public function __construct(private ArticleTable $articleTable, private Router $router)
     {
     }
 

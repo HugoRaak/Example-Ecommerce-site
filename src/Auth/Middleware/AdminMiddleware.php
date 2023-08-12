@@ -11,9 +11,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Check if the user is an admin
  */
-final class AdminMiddleware implements MiddlewareInterface
+final readonly class AdminMiddleware implements MiddlewareInterface
 {
-    public function __construct(readonly private RoleTable $roleTable)
+    public function __construct(private RoleTable $roleTable)
     {
     }
 

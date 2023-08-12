@@ -9,7 +9,7 @@ final class CurrentPathExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('current_path', [$this, 'getCurrentPath'])
+            new TwigFunction('current_path', $this->getCurrentPath(...))
         ];
     }
 

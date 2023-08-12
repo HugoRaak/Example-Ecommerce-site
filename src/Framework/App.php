@@ -97,7 +97,7 @@ final class App implements RequestHandlerInterface
             $builder = new \DI\ContainerBuilder();
             $env = $_ENV['ENV'] ?: 'production';
             if ($env === 'production') {
-                $builder->enableCompilation(dirname(dirname(__DIR__)) . '/tmp/di');
+                $builder->enableCompilation(dirname(__DIR__, 2) . '/tmp/di');
                 $builder->enableDefinitionCache();
             }
             $builder->addDefinitions($this->definitions);

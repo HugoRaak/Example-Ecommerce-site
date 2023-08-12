@@ -11,21 +11,21 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
-final class ArticleBrowseAction
+final readonly class ArticleBrowseAction
 {
     use RouterAware;
 
     public function __construct(
-        readonly private RendererInterface $renderer,
-        readonly private Router $router,
-        readonly private ArticleTable $articleTable,
-        readonly private CategorieTable $categorieTable
+        private RendererInterface $renderer,
+        private Router $router,
+        private ArticleTable $articleTable,
+        private CategorieTable $categorieTable
     ) {
     }
 
     public function __invoke(Request $request): string|ResponseInterface
     {
-        if (strpos((string)$request->getUri(), 'recherche') !== false) {
+        if (str_contains((string)$request->getUri(), 'recherche')) {
             return $this->search($request);
         } elseif ($request->getAttribute('slug')) {
             return $this->categorie($request);
@@ -81,7 +81,7 @@ final class ArticleBrowseAction
         }
         $params = $request->getQueryParams();
         $slug = $request->getAttribute('slug');
-        $search = str_replace('-', ' ', $slug);
+        $search = str_replace('-', ' ', (string) $slug);
         $articles = $this->articleTable->findPaginatedArray(
             12,
             (int)($params['p'] ?? 1),

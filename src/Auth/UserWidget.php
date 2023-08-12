@@ -5,9 +5,9 @@ use App\Admin\AdminWidgetInterface;
 use App\Auth\Database\Table\UserTable;
 use Framework\Renderer\RendererInterface;
 
-final class UserWidget implements AdminWidgetInterface
+final readonly class UserWidget implements AdminWidgetInterface
 {
-    public function __construct(readonly private RendererInterface $renderer, readonly private UserTable $userTable)
+    public function __construct(private RendererInterface $renderer, private UserTable $userTable)
     {
     }
 

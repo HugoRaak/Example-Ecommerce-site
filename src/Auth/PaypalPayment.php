@@ -4,9 +4,9 @@ namespace App\Auth;
 use Framework\Database\Entity\Article;
 use Framework\Router;
 
-final class PaypalPayment
+final readonly class PaypalPayment
 {
-    public function __construct(readonly private Router $router)
+    public function __construct(private Router $router)
     {
     }
 
@@ -22,7 +22,7 @@ final class PaypalPayment
             'price' => $article->__get('price'),
             'sku' => 'ARTICLE' . $article->__get('id'),
             'quantity' => 1
-        ]);
+        ], JSON_THROW_ON_ERROR);
         $clientId = $_ENV['PAYPAL_ID'];
         $captureUrl = 'http://localhost:8000' . $this->router->getUri('pay.capture');
         $authorizationUrl = 'http://localhost:8000' . $this->router->getUri('pay.authorization');

@@ -13,8 +13,8 @@ final class RouterTwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('pathFor', [$this, 'pathFor']),
-            new TwigFunction('is_subpath', [$this, 'isSubPath'])
+            new TwigFunction('pathFor', $this->pathFor(...)),
+            new TwigFunction('is_subpath', $this->isSubPath(...))
         ];
     }
 
@@ -34,6 +34,6 @@ final class RouterTwigExtension extends AbstractExtension
      */
     public function isSubPath(string $path): bool
     {
-        return strpos($_SERVER['REQUEST_URI'] ?? '/', $this->router->getUri($path)) !== false;
+        return str_contains($_SERVER['REQUEST_URI'] ?? '/', $this->router->getUri($path));
     }
 }

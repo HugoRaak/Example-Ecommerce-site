@@ -9,14 +9,14 @@ use Framework\Session\FlashService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-final class LogoutAction
+final readonly class LogoutAction
 {
     use RouterAware;
 
     public function __construct(
-        readonly private DatabaseAuth $auth,
-        readonly private FlashService $flash,
-        readonly private Router $router
+        private DatabaseAuth $auth,
+        private FlashService $flash,
+        private Router $router
     ) {
     }
 

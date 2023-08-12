@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 namespace Framework\Renderer;
 
-final class TwigRenderer implements RendererInterface
+final readonly class TwigRenderer implements RendererInterface
 {
-    public function __construct(readonly private \Twig\Environment $twig)
+    public function __construct(private \Twig\Environment $twig)
     {
     }
 

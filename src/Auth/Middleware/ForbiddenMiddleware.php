@@ -13,9 +13,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * catch forbiddenException and redirect the user
  */
-final class ForbiddenMiddleware implements MiddlewareInterface
+final readonly class ForbiddenMiddleware implements MiddlewareInterface
 {
-    public function __construct(readonly private string $loginPath, readonly private SessionInterface $session)
+    public function __construct(private string $loginPath, private SessionInterface $session)
     {
     }
 
@@ -23,7 +23,7 @@ final class ForbiddenMiddleware implements MiddlewareInterface
     {
         try {
             return $handler->handle($request);
-        } catch (ForbiddenException $e) {
+        } catch (ForbiddenException) {
             (new FlashService($this->session))->error('Vous devez vous connecter pour accéder à cette page');
             $this->session->set('auth.redirect', $request->getUri()->getPath());
             return new RedirectResponse($this->loginPath);

@@ -9,7 +9,7 @@ final class CsrfExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new \Twig\TwigFunction('form_token', [$this, 'formToken'], ['is_safe' => ['html']])
+            new \Twig\TwigFunction('form_token', $this->formToken(...), ['is_safe' => ['html']])
         ];
     }
 

@@ -12,13 +12,13 @@ use Psr\Http\Server\RequestHandlerInterface;
  * this middleware checks whether the URL corresponds to the route prefix
  * and determines whether to execute the middleware or not.
  */
-final class RoutePrefixMiddleware implements MiddlewareInterface
+final readonly class RoutePrefixMiddleware implements MiddlewareInterface
 {
     /** @param string[] $routePrefix */
     public function __construct(
-        readonly private ContainerInterface $container,
-        readonly private array $routePrefix,
-        readonly private string $middleware
+        private ContainerInterface $container,
+        private array $routePrefix,
+        private string $middleware
     ) {
     }
 
@@ -26,7 +26,7 @@ final class RoutePrefixMiddleware implements MiddlewareInterface
     {
         $path = $request->getUri()->getPath();
         foreach ($this->routePrefix as $routePrefix) {
-            if (strpos($path, $routePrefix) === 0) {
+            if (str_starts_with($path, $routePrefix)) {
                 return $this->container->get($this->middleware)->process($request, $handler);
             }
         }

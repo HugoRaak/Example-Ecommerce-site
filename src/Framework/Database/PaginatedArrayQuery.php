@@ -7,12 +7,12 @@ use Pagerfanta\Adapter\AdapterInterface;
  * @template T
  * @implements \Pagerfanta\Adapter\AdapterInterface<T>
  */
-final class PaginatedArrayQuery implements AdapterInterface
+final readonly class PaginatedArrayQuery implements AdapterInterface
 {
     /**
      * @param mixed[] $items
      */
-    public function __construct(readonly private array $items)
+    public function __construct(private array $items)
     {
     }
 

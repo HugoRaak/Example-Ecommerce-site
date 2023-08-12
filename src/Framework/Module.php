@@ -3,9 +3,9 @@ namespace Framework;
 
 abstract class Module
 {
-    const DEFINITIONS = null;
+    protected const DEFINITIONS = null;
 
-    const MIGRATIONS = null;
+    protected const MIGRATIONS = null;
 
-    const SEEDS = null;
+    protected const SEEDS = null;
 }

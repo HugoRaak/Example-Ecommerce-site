@@ -31,10 +31,10 @@ final class DatabaseAuth implements AuthInterface
         try {
             /** @var User $user */
             $user = $this->userTable->findBy('username', $username);
-        } catch (NoRecordException $e) {
+        } catch (NoRecordException) {
             return null;
         }
-        if (password_verify($password, $user->__get('password'))) {
+        if (password_verify($password, (string) $user->__get('password'))) {
             $this->session->set('auth.user', $user->__get('id'));
             return $user;
         }
@@ -64,7 +64,7 @@ final class DatabaseAuth implements AuthInterface
                 $user = $this->userTable->find($userId);
                 $this->user = $user;
                 return $this->user;
-            } catch (NoRecordException $e) {
+            } catch (NoRecordException) {
                 $this->session->delete('auth.user');
                 return null;
             }

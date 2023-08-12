@@ -45,7 +45,7 @@ abstract class CrudAction
             return $this->delete($request);
         } elseif ($request->getAttribute('id')) {
             return $this->edit($request);
-        } elseif (strpos((string)$request->getUri(), 'nouveau') !== false) {
+        } elseif (str_contains((string)$request->getUri(), 'nouveau')) {
             return $this->create($request);
         }
         return $this->index($request);
@@ -138,9 +138,7 @@ abstract class CrudAction
     protected function getParams(Request $request, object $entity): array
     {
         $params = $request->getParsedBody() + $request->getUploadedFiles();
-        return array_filter($params, function ($key) {
-            return in_array($key, []);
-        }, ARRAY_FILTER_USE_KEY);
+        return array_filter($params, fn($key) => in_array($key, []), ARRAY_FILTER_USE_KEY);
     }
 
     /**

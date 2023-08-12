@@ -14,7 +14,7 @@ final class PagerFantaExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new \Twig\TwigFunction('paginateExtension', [$this, 'paginateExtension'], ['is_safe' => ['html']])
+            new \Twig\TwigFunction('paginateExtension', $this->paginateExtension(...), ['is_safe' => ['html']])
         ];
     }
 

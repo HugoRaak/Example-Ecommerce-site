@@ -12,9 +12,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * invokes the appropriate controller action based on the matched route if it possible
  */
-final class DispatcherMiddleware implements MiddlewareInterface
+final readonly class DispatcherMiddleware implements MiddlewareInterface
 {
-    public function __construct(readonly private ContainerInterface $container)
+    public function __construct(private ContainerInterface $container)
     {
     }
 

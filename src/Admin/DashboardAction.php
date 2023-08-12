@@ -3,12 +3,12 @@ namespace App\Admin;
 
 use Framework\Renderer\RendererInterface;
 
-final class DashboardAction
+final readonly class DashboardAction
 {
     /**
      * @param  AdminWidgetInterface[] $widgets
      */
-    public function __construct(readonly private RendererInterface $renderer, readonly private array $widgets)
+    public function __construct(private RendererInterface $renderer, private array $widgets)
     {
     }
 
@@ -17,9 +17,11 @@ final class DashboardAction
      */
     public function __invoke(): string
     {
-        $widgets = array_reduce($this->widgets, function (string $html, AdminWidgetInterface $widget) {
-            return $html . $widget->render();
-        }, '');
+        $widgets = array_reduce(
+            $this->widgets,
+            fn(string $html, AdminWidgetInterface $widget) => $html . $widget->render(),
+            ''
+        );
         return $this->renderer->render('@admin/dashboard', ['widgets' => $widgets]);
     }
 }

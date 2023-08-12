@@ -20,7 +20,7 @@ class ArticleSeeder extends AbstractSeed
                 'description' => $faker->text(500),
                 'created_at' => $date,
                 'updated_at' => $date,
-                'categorie_id' => rand(1, 4)
+                'categorie_id' => random_int(1, 4)
             ];
         }
         $this->table('article')

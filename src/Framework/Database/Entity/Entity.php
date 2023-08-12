@@ -49,7 +49,7 @@ class Entity
     public static function hydrate(object $entity, array $params): object
     {
         foreach ($params as $key => $value) {
-            if (strpos($key, '_at') === false && property_exists($entity, $key)) {
+            if (!str_contains($key, '_at') && property_exists($entity, $key)) {
                 $value = $value === 'null' ? ($value = null) : self::typeCast($key, $value, $entity);
                 $entity->__set($key, $value);
             }

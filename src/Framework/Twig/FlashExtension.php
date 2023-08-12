@@ -13,7 +13,7 @@ final class FlashExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new \Twig\TwigFunction('flash', [$this, 'getFlash'])
+            new \Twig\TwigFunction('flash', $this->getFlash(...))
         ];
     }
 

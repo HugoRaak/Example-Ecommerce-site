@@ -8,7 +8,7 @@ use Psr\Container\ContainerInterface;
 
 final class ContactModule extends Module
 {
-    const DEFINITIONS = __DIR__ . '/config.php';
+    protected const DEFINITIONS = __DIR__ . '/config.php';
 
     public function __construct(readonly ContainerInterface $container)
     {

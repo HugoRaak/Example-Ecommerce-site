@@ -8,7 +8,7 @@ final class FormExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new \Twig\TwigFunction('field', [$this, 'field'], [
+            new \Twig\TwigFunction('field', $this->field(...), [
                 'is_safe' => ['html'],
                 'needs_context' => true
             ])
@@ -24,7 +24,7 @@ final class FormExtension extends AbstractExtension
     public function field(array $context, string $key, mixed $value, string $label = '', array $attributes = []): string
     {
         $cleanKey = str_replace('[]', '', $key);
-        $attributes['type'] = $attributes['type'] ?? 'text';
+        $attributes['type'] ??= 'text';
         $attributes += [
             'class' => 'form-control ' . ($attributes['class'] ?? ''),
             'name' => $key,

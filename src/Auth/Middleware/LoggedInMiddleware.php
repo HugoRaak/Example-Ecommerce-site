@@ -12,9 +12,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Check if a user is connected
  */
-final class LoggedInMiddleware implements MiddlewareInterface
+final readonly class LoggedInMiddleware implements MiddlewareInterface
 {
-    public function __construct(readonly private AuthInterface $auth)
+    public function __construct(private AuthInterface $auth)
     {
     }
 
@@ -26,7 +26,7 @@ final class LoggedInMiddleware implements MiddlewareInterface
     {
         $user = $this->auth->getUser();
         if (!$user instanceof \App\Auth\Database\Entity\User) {
-            if (strpos($request->getUri()->getPath(), '/admin') !== false) {
+            if (str_contains($request->getUri()->getPath(), '/admin')) {
                 throw new NotFoundException();
             }
             throw new ForbiddenException();

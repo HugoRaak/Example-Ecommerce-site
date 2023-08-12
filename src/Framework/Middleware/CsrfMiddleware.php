@@ -11,9 +11,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Check if the form token is correct
  */
-final class CsrfMiddleware implements MiddlewareInterface
+final readonly class CsrfMiddleware implements MiddlewareInterface
 {
-    public function __construct(readonly private AntiCSRF $csrf)
+    public function __construct(private AntiCSRF $csrf)
     {
     }
 

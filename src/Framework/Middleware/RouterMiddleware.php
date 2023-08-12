@@ -10,9 +10,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * match the request uri with a route
  */
-final class RouterMiddleware implements MiddlewareInterface
+final readonly class RouterMiddleware implements MiddlewareInterface
 {
-    public function __construct(readonly private Router $router)
+    public function __construct(private Router $router)
     {
     }
 
@@ -26,10 +26,12 @@ final class RouterMiddleware implements MiddlewareInterface
             throw new \Framework\Router\NotFoundException();
         }
         $params = $route->getParams();
-        $request = array_reduce(array_keys($params), function ($request, $key) use ($params) {
-            return $request->withAttribute($key, $params[$key]);
-        }, $request);
-        $request = $request->withAttribute(get_class($route), $route);
+        $request = array_reduce(
+            array_keys($params),
+            fn($request, $key) => $request->withAttribute($key, $params[$key]),
+            $request
+        );
+        $request = $request->withAttribute($route::class, $route);
         return $handler->handle($request);
     }
 }

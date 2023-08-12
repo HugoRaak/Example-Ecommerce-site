@@ -16,9 +16,11 @@ final class UserValidator extends Validator
         parent::__construct($dataForm);
         $this
             ->rule('required', ['username', 'email', 'password', 'confirm_password'])
-            ->rule(function ($field, $value) use ($userTable) {
-                return !$userTable->exists($field, $value);
-            }, 'username', 'Cette valeur est déjà utilisé')
+            ->rule(
+                fn($field, $value) => !$userTable->exists($field, $value),
+                'username',
+                'Cette valeur est déjà utilisé'
+            )
             ->rule('lengthBetween', 'username', 2, 30)
             ->rule('ascii', 'username')
             ->rule('email', 'email')

@@ -32,9 +32,11 @@ final class ArticleValidator extends Validator
         $this
             ->rule('required', ['name', 'slug', 'price'])
             ->rule('lengthBetween', ['name', 'slug'], 2, 100)
-            ->rule(function ($field, $value) use ($articleTable, $id) {
-                return !$articleTable->exists($field, $value, $id);
-            }, ['name', 'slug'], 'Cette valeur est déjà utilisé')
+            ->rule(
+                fn($field, $value) => !$articleTable->exists($field, $value, $id),
+                ['name', 'slug'],
+                'Cette valeur est déjà utilisé'
+            )
             ->rule('regex', 'slug', '/^[a-z0-9\-]+$/')
             ->rule('numeric', 'price')
             ->rule('min', 'price', 0.01)
@@ -45,12 +47,16 @@ final class ArticleValidator extends Validator
                 }
                 return true;
             }, 'price', 'Trop de chiffres après la \',\'')
-            ->rule(function ($field, $value) {
-                return $this->extension($value, ['jpg', 'jpeg', 'png', 'gif']);
-            }, 'images', 'Une des images n\'est pas au format valide (jpg, jpeg, png, gif)')
-            ->rule(function ($field, $value) {
-                return count($value) <= 10;
-            }, 'images', 'Maximum 10 images')
+            ->rule(
+                fn($field, $value) => $this->extension($value, ['jpg', 'jpeg', 'png', 'gif']),
+                'images',
+                'Une des images n\'est pas au format valide (jpg, jpeg, png, gif)'
+            )
+            ->rule(
+                fn($field, $value) => (is_countable($value) ? count($value) : 0) <= 10,
+                'images',
+                'Maximum 10 images'
+            )
             ->rule(function ($field, $value) use ($categorieTable) {
                 if ($value !== 'null') {
                     return $categorieTable->exists('id', $value);
@@ -59,9 +65,7 @@ final class ArticleValidator extends Validator
             }, 'categorie_id', 'La catégorie n\'existe pas');
         if ($request->getAttribute('id') === null) {
             $this->rule(
-                function ($field, $value) {
-                    return $this->uploaded($value);
-                },
+                fn($field, $value) => $this->uploaded($value),
                 'images',
                 'Au moins une image est requise'
             );

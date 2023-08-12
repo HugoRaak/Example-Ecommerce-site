@@ -8,7 +8,7 @@ final class TextExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new \Twig\TwigFilter('exerpt', [$this, 'exerpt'], ['is_safe' => ['html']])
+            new \Twig\TwigFilter('exerpt', $this->exerpt(...), ['is_safe' => ['html']])
         ];
     }
 

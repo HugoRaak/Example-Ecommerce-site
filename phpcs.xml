@@ -9,5 +9,8 @@
     <file>public/index.php</file>
 
     <rule ref="PSR2"/>
+    <rule ref="PSR1">
+        <exclude name="PSR1.Files.SideEffects"/>
+    </rule>
 
 </ruleset>

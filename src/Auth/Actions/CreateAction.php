@@ -13,14 +13,14 @@ use Framework\Session\FlashService;
 use Framework\Session\SessionInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-final class CreateAction
+final readonly class CreateAction
 {
     public function __construct(
-        readonly private RendererInterface $renderer,
-        readonly private UserTable $userTable,
-        readonly private SessionInterface $session,
-        readonly private Router $router,
-        readonly private RoleTable $roleTable
+        private RendererInterface $renderer,
+        private UserTable $userTable,
+        private SessionInterface $session,
+        private Router $router,
+        private RoleTable $roleTable
     ) {
     }
 
@@ -61,10 +61,12 @@ final class CreateAction
      */
     private function getParams(array $params)
     {
-        $params = array_filter($params, function ($key) {
-            return in_array($key, ['username', 'email', 'password', 'role_id']);
-        }, ARRAY_FILTER_USE_KEY);
-        $params['password'] = password_hash($params['password'], PASSWORD_ARGON2ID);
+        $params = array_filter(
+            $params,
+            fn($key) => in_array($key, ['username', 'email', 'password', 'role_id']),
+            ARRAY_FILTER_USE_KEY
+        );
+        $params['password'] = password_hash((string) $params['password'], PASSWORD_ARGON2ID);
         return $params;
     }
 }

@@ -11,11 +11,11 @@ use App\Article\Actions\CategorieCrudAction;
 
 final class ArticleModule extends Module
 {
-    const DEFINITIONS = __DIR__ . '/config.php';
+    protected const DEFINITIONS = __DIR__ . '/config.php';
 
-    const MIGRATIONS = __DIR__ . '/db/migrations';
+    protected const MIGRATIONS = __DIR__ . '/db/migrations';
 
-    const SEEDS = __DIR__ . '/db/seeds';
+    protected const SEEDS = __DIR__ . '/db/seeds';
 
     public function __construct(readonly ContainerInterface $container)
     {

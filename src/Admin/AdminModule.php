@@ -8,7 +8,7 @@ use Framework\Router;
 
 final class AdminModule extends Module
 {
-    const DEFINITIONS = __DIR__ . '/config.php';
+    protected const DEFINITIONS = __DIR__ . '/config.php';
 
     public function __construct(
         readonly RendererInterface $renderer,

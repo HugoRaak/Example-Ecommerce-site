@@ -22,9 +22,7 @@ final class LogoutAction
 
     /**
      * logout the user and redirect him to the previous url
-     * @param Request $request
      *
-     * @return ResponseInterface
      */
     public function __invoke(Request $request): ResponseInterface
     {

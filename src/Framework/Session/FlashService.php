@@ -16,9 +16,7 @@ final class FlashService
 
     /**
      * set a success flash message
-     * @param string $messages
      *
-     * @return void
      */
     public function success(string $messages): void
     {
@@ -29,9 +27,7 @@ final class FlashService
 
     /**
      * set an error flash message
-     * @param string $messages
      *
-     * @return void
      */
     public function error(string $messages): void
     {
@@ -42,9 +38,7 @@ final class FlashService
 
     /**
      * Retrieve the flash message
-     * @param string $type
      *
-     * @return string|null
      */
     public function get(string $type): ?string
     {

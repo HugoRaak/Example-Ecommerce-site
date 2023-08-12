@@ -10,8 +10,6 @@ final class CategorieValidator extends Validator
     /**
      * add rules about categorie to the validator
      *
-     * @param ServerRequestInterface $request
-     * @param CategorieTable $table
      * @param int|null $id=null
      */
     public function __construct(

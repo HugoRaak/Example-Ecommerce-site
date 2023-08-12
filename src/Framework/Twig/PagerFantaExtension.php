@@ -22,11 +22,9 @@ final class PagerFantaExtension extends AbstractExtension
      * return button to paginate a pagerfanta object
      *
      * @param Pagerfanta<\Pagerfanta\PagerfantaInterface> $paginatedResult
-     * @param string $route
      * @param mixed[] $params
      * @param mixed[] $queryArgs
      *
-     * @return string
      */
     public function paginateExtension(
         Pagerfanta $paginatedResult,

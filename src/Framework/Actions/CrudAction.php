@@ -53,9 +53,7 @@ abstract class CrudAction
 
     /**
      * display all items
-     * @param Request $request
      *
-     * @return string
      */
     protected function index(Request $request): string
     {
@@ -66,9 +64,7 @@ abstract class CrudAction
 
     /**
      * edit an item
-     * @param Request $request
      *
-     * @return string|ResponseInterface
      */
     protected function edit(Request $request): string|ResponseInterface
     {
@@ -93,9 +89,7 @@ abstract class CrudAction
 
     /**
      * create an item
-     * @param Request $request
      *
-     * @return string|ResponseInterface
      */
     protected function create(Request $request): string|ResponseInterface
     {
@@ -120,9 +114,7 @@ abstract class CrudAction
 
     /**
      * delete an item
-     * @param Request $request
      *
-     * @return ResponseInterface
      */
     protected function delete(Request $request): ResponseInterface
     {
@@ -134,8 +126,6 @@ abstract class CrudAction
     /**
      * get parameters from a form
      *
-     * @param Request $request
-     * @param object $entity
      *
      * @return mixed[]
      */
@@ -160,10 +150,8 @@ abstract class CrudAction
 
     /**
      * Retrieve the validator
-     * @param Request $request
      * @param int|null $id
      *
-     * @return \Framework\Validator
      */
     protected function getValidator(Request $request, ?int $id = null): \Framework\Validator
     {

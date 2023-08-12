@@ -20,11 +20,8 @@ class Router
 
     /**
      * add route with method GET
-     * @param string $url
      * @param string|callable $callback
-     * @param string $name
      *
-     * @return self
      */
     public function get(string $url, string|callable $callback, string $name): self
     {
@@ -34,11 +31,9 @@ class Router
 
     /**
      * add route with method POST
-     * @param string $url
      * @param string|callable $callback
      * @param string $name
      *
-     * @return self
      */
     public function post(string $url, string|callable $callback, ?string $name = null): self
     {
@@ -48,11 +43,9 @@ class Router
 
     /**
      * add route with method DELETE
-     * @param string $url
      * @param string|callable $callback
      * @param string|null $name
      *
-     * @return self
      */
     public function delete(string $url, string|callable $callback, ?string $name = null): self
     {
@@ -62,8 +55,6 @@ class Router
 
     /**
      * try to match the request uri with a route
-     * @param  ServerRequestInterface $request
-     * @return Route|null
      */
     public function match(ServerRequestInterface $request): ?Route
     {
@@ -76,11 +67,9 @@ class Router
 
     /**
      * retrieve the uri correspond to a route
-     * @param string $name
      * @param mixed[] $params
      * @param mixed[] $queryArgs
      *
-     * @return string
      */
     public function getUri(string $name, array $params = [], array $queryArgs = []): string
     {
@@ -93,10 +82,7 @@ class Router
 
     /**
      * add match type for the route creation
-     * @param string $key
-     * @param string $regex
      *
-     * @return void
      */
     public function addMatchTypes(string $key, string $regex): void
     {
@@ -106,11 +92,7 @@ class Router
     /**
      * generate routes of the CRUD
      *
-     * @param string $prefix
-     * @param string $action
-     * @param string $prefixPath
      *
-     * @return void
      */
     public function crud(string $prefix, string $action, string $prefixPath): void
     {

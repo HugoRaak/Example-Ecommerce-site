@@ -12,7 +12,6 @@ final class PaypalPayment
 
     /**
      * return the right paypal buttons
-     * @param Article $article
      *
      * @return mixed
      */

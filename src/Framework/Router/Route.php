@@ -20,7 +20,6 @@ class Route
 
     /**
      * get the name of the route
-     * @return string|null
      */
     public function getName(): ?string
     {
@@ -29,7 +28,6 @@ class Route
 
     /**
      * get the callback associate to the route
-     * @return string|callable
      */
     public function getCallback(): string|callable
     {

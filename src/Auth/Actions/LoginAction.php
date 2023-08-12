@@ -24,9 +24,7 @@ final class LoginAction
 
     /**
      * login a user and redirect him to the previous url
-     * @param Request $request
      *
-     * @return string|RedirectResponse
      */
     public function __invoke(Request $request): string|RedirectResponse
     {
@@ -47,9 +45,7 @@ final class LoginAction
 
     /**
      * return the right url to redirect
-     * @param User $user
      *
-     * @return string
      */
     private function getRedirectUrl(User $user): string
     {

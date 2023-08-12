@@ -38,9 +38,7 @@ final class UserCrudAction extends CrudAction
 
     /**
      * display all the articles of a user
-     * @param Request $request
      *
-     * @return string
      */
     protected function index(Request $request): string
     {
@@ -54,9 +52,7 @@ final class UserCrudAction extends CrudAction
 
     /**
      * delete an article of a user
-     * @param Request $request
      *
-     * @return ResponseInterface
      */
     protected function delete(Request $request): ResponseInterface
     {
@@ -68,7 +64,6 @@ final class UserCrudAction extends CrudAction
 
     /**
      * get parameters from a form
-     * @param Request $request
      * @param Article $entity
      *
      * @return mixed[]
@@ -106,10 +101,8 @@ final class UserCrudAction extends CrudAction
 
     /**
      * Retrieve the validator for the CRUD object
-     * @param ServerRequestInterface $request
      * @param int|null $id
      *
-     * @return \Framework\Validator
      */
     protected function getValidator(ServerRequestInterface $request, ?int $id = null): \Framework\Validator
     {
@@ -118,7 +111,6 @@ final class UserCrudAction extends CrudAction
 
     /**
      * delete images of an article
-     * @param Article $article
      *
      * @return mixed
      */
@@ -136,7 +128,6 @@ final class UserCrudAction extends CrudAction
     /**
      * upload images
      * @param \Psr\Http\Message\UploadedFileInterface[] $files
-     * @param Article $article
      *
      * @return mixed
      */

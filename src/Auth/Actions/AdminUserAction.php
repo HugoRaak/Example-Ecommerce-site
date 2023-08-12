@@ -35,9 +35,7 @@ final class AdminUserAction
 
     /**
      * display all users
-     * @param Request $request
      *
-     * @return string
      */
     private function index(Request $request): string
     {
@@ -49,9 +47,7 @@ final class AdminUserAction
 
     /**
      * delete a user
-     * @param Request $request
      *
-     * @return ResponseInterface
      */
     private function delete(Request $request): ResponseInterface
     {
@@ -62,9 +58,7 @@ final class AdminUserAction
 
     /**
      * add a role to user
-     * @param Request $request
      *
-     * @return ResponseInterface
      */
     private function addRole(Request $request): ResponseInterface
     {

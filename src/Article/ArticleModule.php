@@ -17,9 +17,6 @@ final class ArticleModule extends Module
 
     const SEEDS = __DIR__ . '/db/seeds';
 
-    /**
-     * @param ContainerInterface $container
-     */
     public function __construct(readonly ContainerInterface $container)
     {
         $container->get(RendererInterface::class)->addPath('article', dirname(__DIR__) . '/Article/views');

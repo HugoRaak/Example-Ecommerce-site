@@ -26,9 +26,7 @@ final class CreateAction
 
     /**
      * create a user
-     * @param Request $request
      *
-     * @return string|RedirectResponse
      */
     public function __invoke(Request $request): string|RedirectResponse
     {

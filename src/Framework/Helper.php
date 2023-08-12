@@ -5,9 +5,7 @@ class Helper
 {
     /**
      * generate a slug from a string
-     * @param string $string
      *
-     * @return string
      */
     public static function clearStr(string $string): string
     {
@@ -17,16 +15,12 @@ class Helper
         $string = str_replace("039", ' ', str_replace("ccedil", 'c', $string));
         $string = preg_replace('/ +/', ' ', $string) ?? '';
         $string = preg_replace('/([eE]acut|[gG]rave|[cC]irc|[uU]ml|sect|pound|quot|deg)/u', '', $string) ?? '';
-        $string = strtolower(trim($string, '-'));
-        return $string;
+        return strtolower(trim($string, '-'));
     }
 
     /**
      * clear a string
-     * @param string $title
-     * @param int $limit
      *
-     * @return string
      */
     public static function createSlug(string $title, int $limit = 80): string
     {

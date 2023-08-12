@@ -18,7 +18,6 @@ final class PaginatedArrayQuery implements AdapterInterface
 
     /**
      * get the number of items
-     * @return int
      */
     public function getNbResults(): int
     {
@@ -28,8 +27,6 @@ final class PaginatedArrayQuery implements AdapterInterface
     /**
      * Retrieve items corresponding to the number of items per page
      *
-     * @param int $offset
-     * @param int $length
      *
      * @return iterable<array-key, T>
      */

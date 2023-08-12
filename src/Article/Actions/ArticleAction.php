@@ -23,16 +23,14 @@ final class ArticleAction
         if ($request->getAttribute('id')) {
             return $this->show($request);
         }
-        return $this->index($request);
+        return $this->index();
     }
 
     /**
      * Display recents articles
-     * @param Request $request
      *
-     * @return string
      */
-    private function index(Request $request): string
+    private function index(): string
     {
         $articles = $this->articleTable->findAll("created_at DESC", 12);
         return $this->renderer->render('@article/index', compact('articles'));
@@ -40,9 +38,7 @@ final class ArticleAction
 
     /**
      * display one article
-     * @param Request $request
      *
-     * @return string
      */
     private function show(Request $request): string
     {

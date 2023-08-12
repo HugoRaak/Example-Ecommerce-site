@@ -32,9 +32,7 @@ final class App implements RequestHandlerInterface
 
     /**
      * add a module
-     * @param string $module
      *
-     * @return self
      */
     public function addModule(string $module): self
     {
@@ -44,10 +42,8 @@ final class App implements RequestHandlerInterface
 
     /**
      * add a middleware
-     * @param string $middleware
      * @param string[]|null $routePrefix
      *
-     * @return self
      */
     public function pipe(string $middleware, ?array $routePrefix = []): self
     {
@@ -61,10 +57,8 @@ final class App implements RequestHandlerInterface
 
     /**
      * execute all middlewares
-     * @param ServerRequestInterface $request
      *
-     * @return ResponseInterface
-     * 
+     *
      * @throws \Exception if there is no more middleware to process
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -78,10 +72,8 @@ final class App implements RequestHandlerInterface
 
     /**
      * retrieve modules and launches middleware
-     * @param ServerRequestInterface $request
      *
-     * @return ResponseInterface|\Exception
-     * 
+     *
      * @throws \Exception if there is no container
      */
     public function run(ServerRequestInterface $request): ResponseInterface|\Exception
@@ -98,7 +90,6 @@ final class App implements RequestHandlerInterface
 
     /**
      * retrieve the container
-     * @return ContainerInterface
      */
     public function getContainer(): ContainerInterface
     {
@@ -122,7 +113,6 @@ final class App implements RequestHandlerInterface
 
     /**
      * get an instance of a middleware
-     * @return \Psr\Http\Server\MiddlewareInterface|null
      */
     private function getMiddleware(): ?\Psr\Http\Server\MiddlewareInterface
     {

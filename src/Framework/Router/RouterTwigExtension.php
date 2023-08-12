@@ -20,10 +20,8 @@ final class RouterTwigExtension extends AbstractExtension
 
     /**
      * return the uri correspond to the route $name
-     * @param string $name
      * @param mixed[] $params
      *
-     * @return string
      */
     public function pathFor(string $name, array $params = []): string
     {
@@ -32,9 +30,7 @@ final class RouterTwigExtension extends AbstractExtension
 
     /**
      * return true if the path is a sub path of the request uri
-     * @param string $path
      *
-     * @return bool
      */
     public function isSubPath(string $path): bool
     {

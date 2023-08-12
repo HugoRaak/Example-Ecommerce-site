@@ -15,7 +15,6 @@ final class CurrentPathExtension extends AbstractExtension
 
     /**
      * retrieve the current request uri
-     * @return string
      */
     public function getCurrentPath(): string
     {

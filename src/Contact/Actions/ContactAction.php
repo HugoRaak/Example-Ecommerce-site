@@ -25,7 +25,6 @@ final class ContactAction
 
     /**
      * manage contact form and send mail
-     * @param Request $request
      *
      * @return string
      */
@@ -57,7 +56,6 @@ final class ContactAction
      * send a mail
      * @param string[] $params
      *
-     * @return bool
      */
     private function sendMail(array $params): bool
     {

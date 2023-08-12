@@ -30,9 +30,7 @@ final class PaymentAction
 
     /**
      * display the paypal button
-     * @param Request $request
      *
-     * @return string
      */
     public function index(Request $request): string
     {
@@ -43,9 +41,7 @@ final class PaymentAction
 
     /**
      * verify and capture paypal authorization
-     * @param Request $request
      *
-     * @return Response
      */
     public function authorization(Request $request): Response
     {
@@ -67,9 +63,7 @@ final class PaymentAction
 
     /**
      * verify and capture the payment
-     * @param Request $request
      *
-     * @return Response
      */
     public function capture(Request $request): Response
     {
@@ -91,25 +85,23 @@ final class PaymentAction
 
     /**
      * verify the parameter of authorization
-     * @param string $authorizationId
      *
-     * @return bool
      */
     private function verifyAuthorization(string $authorizationId): bool
     {
         //TODO gestion de l'authorisation de paypal
+        if($authorizationId) return true;
         return false;
     }
 
     /**
      * verify parameters of the payment to capture
-     * @param string $orderID
      *
-     * @return bool
      */
-    private function captureFunds(string $orderID): bool
+    private function captureFunds(string $orderId): bool
     {
         //TODO effectuer la capture du paiement
+        if($orderId) return true;
         return false;
     }
 }

@@ -15,9 +15,7 @@ final class TextExtension extends AbstractExtension
     /**
      * retrieve an exerpt of a text
      * @param string $text
-     * @param int $maxLenght
      *
-     * @return string
      */
     public function exerpt(?string $text, int $maxLenght = 80): string
     {

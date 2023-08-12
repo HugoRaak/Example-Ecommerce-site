@@ -14,11 +14,9 @@ trait RouterAware
     /**
      * return a response of redirection
      *
-     * @param string $path
      * @param mixed[] $params
      * @param mixed[] $queryArgs
      *
-     * @return ResponseInterface
      */
     public function redirect(string $path, array $params = [], array $queryArgs = []): ResponseInterface
     {

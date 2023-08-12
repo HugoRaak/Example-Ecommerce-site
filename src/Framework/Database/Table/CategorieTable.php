@@ -15,7 +15,6 @@ final class CategorieTable extends Table
 
     /**
      * return query for PaginatedQuery
-     * @return Select
      */
     protected function paginationQuery(): Select
     {

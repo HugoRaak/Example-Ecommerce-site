@@ -17,7 +17,6 @@ final class ArticleTable extends Table
 
     /**
      * return query for PaginatedQuery
-     * @return Select
      */
     protected function paginationQuery(): Select
     {
@@ -26,7 +25,6 @@ final class ArticleTable extends Table
 
     /**
      * Find articles of a user
-     * @param int $id
      *
      * @return mixed
      */
@@ -46,9 +44,6 @@ final class ArticleTable extends Table
     /**
      * Get paginated articles from a category ID
      *
-     * @param int $perPage
-     * @param int $currentPage
-     * @param int $id
      *
      * @return Pagerfanta<\Pagerfanta\PagerfantaInterface>
      */
@@ -64,7 +59,6 @@ final class ArticleTable extends Table
 
     /**
      * search correspondance in table article and the params $search
-     * @param string $search
      *
      * @return Article[]
      */

@@ -6,7 +6,6 @@ use Framework\Renderer\RendererInterface;
 final class DashboardAction
 {
     /**
-     * @param  RendererInterface $renderer
      * @param  AdminWidgetInterface[] $widgets
      */
     public function __construct(readonly private RendererInterface $renderer, readonly private array $widgets)
@@ -15,7 +14,6 @@ final class DashboardAction
 
     /**
      * render the admin dashboard
-     * @return string
      */
     public function __invoke(): string
     {

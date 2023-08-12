@@ -15,7 +15,6 @@ final class MailInfo
      * hydrate mailInfo
      * @param mixed[] $params
      *
-     * @return void
      */
     public function hydrate(array $params): void
     {

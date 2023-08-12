@@ -112,7 +112,6 @@ final class Article extends Entity
 
     /**
      * get first image in string or all images in array
-     * @param bool $one
      *
      * @return string[]|string|null
      */
@@ -129,10 +128,7 @@ final class Article extends Entity
 
     /**
      * Retrieve a image in the right format
-     * @param string $image
-     * @param string $format
      *
-     * @return string
      */
     public function getImageFormat(string $image, string $format): string
     {

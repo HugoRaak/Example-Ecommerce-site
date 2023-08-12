@@ -10,7 +10,6 @@ final class UserValidator extends Validator
      * add rules about user to the validator
      *
      * @param mixed[] $dataForm
-     * @param UserTable $userTable
      */
     public function __construct(readonly array $dataForm, readonly UserTable $userTable)
     {

@@ -21,7 +21,6 @@ final class AdminTwigExtension extends AbstractExtension
 
     /**
      * render view the navbar link of widgets
-     * @return string
      */
     public function renderMenu(): string
     {

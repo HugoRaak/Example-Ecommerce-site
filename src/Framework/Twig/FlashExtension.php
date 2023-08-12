@@ -19,9 +19,7 @@ final class FlashExtension extends AbstractExtension
 
     /**
      * retrieve the flash message
-     * @param string $type
      *
-     * @return string|null
      */
     public function getFlash(string $type): ?string
     {

@@ -17,7 +17,6 @@ final class ArticleWidget implements AdminWidgetInterface
 
     /**
      * display widget on the admin dashboard
-     * @return string
      */
     public function render(): string
     {
@@ -28,7 +27,6 @@ final class ArticleWidget implements AdminWidgetInterface
 
     /**
      * display the link in the admin navbar
-     * @return string
      */
     public function renderMenu(): string
     {

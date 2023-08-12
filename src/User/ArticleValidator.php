@@ -18,9 +18,6 @@ final class ArticleValidator extends Validator
     /**
      * add rules about article to the validator
      *
-     * @param ServerRequestInterface $request
-     * @param ArticleTable $articleTable
-     * @param CategorieTable $categorieTable
      * @param int|null $id=null
      */
     public function __construct(
@@ -76,7 +73,6 @@ final class ArticleValidator extends Validator
      * verify if all files are correctly upload
      * @param (\Psr\Http\Message\UploadedFileInterface|null)[] $files
      *
-     * @return bool
      */
     private function uploaded(array $files = []): bool
     {
@@ -93,7 +89,6 @@ final class ArticleValidator extends Validator
      * @param (\Psr\Http\Message\UploadedFileInterface|null)[] $files
      * @param string[] $extensions
      *
-     * @return bool
      */
     private function extension(array $files = [], array $extensions = []): bool
     {

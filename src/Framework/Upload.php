@@ -22,8 +22,6 @@ abstract class Upload
 
     /**
      * upload a file with its formats
-     * @param UploadedFileInterface $file
-     * @param string $filename
      *
      * @return string filename
      */
@@ -51,9 +49,7 @@ abstract class Upload
 
     /**
      * add a copy suffix if the file to upload exist
-     * @param string $targetPath
      *
-     * @return string
      */
     private function addCopySuffix(string $targetPath): string
     {
@@ -73,10 +69,7 @@ abstract class Upload
 
     /**
      * add a suffix to a path
-     * @param string $path
-     * @param string $suffix
      *
-     * @return string|null
      */
     private function getPathSuffix(string $path, string $suffix) : ?string
     {
@@ -90,9 +83,7 @@ abstract class Upload
 
     /**
      * generate the different format of the file
-     * @param string $targetPath
      *
-     * @return void
      */
     private function generateFormat(string $targetPath): void
     {
@@ -110,7 +101,6 @@ abstract class Upload
      * delete a file
      * @param string|null $filename
      *
-     * @return void
      */
     public function delete(?string $filename = null): void
     {

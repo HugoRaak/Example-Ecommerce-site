@@ -9,10 +9,8 @@ final class TwigRenderer implements RendererInterface
 
     /**
      * add path to change view
-     * @param string $namespace
      * @param string|null $path
      *
-     * @return void
      */
     public function addPath(string $namespace, ?string $path = null): void
     {
@@ -25,10 +23,7 @@ final class TwigRenderer implements RendererInterface
 
     /**
      * add global variable to all views
-     * @param string $key
-     * @param mixed $value
      *
-     * @return void
      */
     public function addGlobal(string $key, mixed $value): void
     {
@@ -37,7 +32,6 @@ final class TwigRenderer implements RendererInterface
 
     /**
      * get the twig environment
-     * @return \Twig\Environment
      */
     public function getTwig(): \Twig\Environment
     {
@@ -48,10 +42,8 @@ final class TwigRenderer implements RendererInterface
      * render a view
      * path can be precise with namespace
      * $this->render('@namespace/view');
-     * @param string $view
      * @param mixed[] $params
      *
-     * @return string
      */
     public function render(string $view, array $params = []): string
     {

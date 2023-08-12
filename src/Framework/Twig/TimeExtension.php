@@ -15,10 +15,7 @@ final class TimeExtension extends AbstractExtension
     /**
      * generate a tag html to get the date with timeago.js
      *
-     * @param \DateTime $date
-     * @param string $format
      *
-     * @return string
      */
     public function ago(\DateTime $date, string $format = "Y-m-d H:i"): string
     {

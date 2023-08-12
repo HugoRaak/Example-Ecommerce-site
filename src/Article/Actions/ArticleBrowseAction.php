@@ -36,9 +36,7 @@ final class ArticleBrowseAction
 
     /**
      * display all the articles
-     * @param Request $request
      *
-     * @return string
      */
     private function index(Request $request): string
     {
@@ -49,9 +47,7 @@ final class ArticleBrowseAction
 
     /**
      * display all the articles from a categorie
-     * @param Request $request
      *
-     * @return string
      */
     private function categorie(Request $request): string
     {
@@ -71,7 +67,6 @@ final class ArticleBrowseAction
 
     /**
      * display all the articles from a research
-     * @param Request $request
      *
      * @return string
      */
@@ -101,7 +96,6 @@ final class ArticleBrowseAction
     /**
      * get params for the render view
      * @param mixed[] $params
-     * @param string $routeSuffix
      *
      * @return mixed[]
      */

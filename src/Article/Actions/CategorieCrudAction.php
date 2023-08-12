@@ -32,8 +32,6 @@ final class CategorieCrudAction extends CrudAction
 
     /**
      * get parameters from a form
-     * @param Request $request
-     * @param object $entity
      *
      * @return string[]
      */

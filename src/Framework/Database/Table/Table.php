@@ -24,7 +24,6 @@ class Table
 
     /**
      * get actual Table
-     * @return string|null
      */
     public function getTable(): ?string
     {
@@ -33,7 +32,6 @@ class Table
 
     /**
      * get actual Entity
-     * @return string|null
      */
     public function getEntity(): ?string
     {
@@ -42,7 +40,6 @@ class Table
 
     /**
      * get the fluentPDO instance
-     * @return Query
      */
     public function getFpdo(): Query
     {
@@ -60,7 +57,6 @@ class Table
 
     /**
      * find an element by ID
-     * @param int $id
      *
      * @return (E is null ? object : E)
      */
@@ -73,8 +69,6 @@ class Table
 
     /**
      * find a element by a field
-     * @param string $field
-     * @param mixed $value
      *
      * @return (E is null ? object : E)
      */
@@ -126,8 +120,6 @@ class Table
 
     /**
      * find a row from a join element id
-     * @param string $fromTable
-     * @param int $id
      *
      * @return (E is null ? object : E)
      */
@@ -146,7 +138,6 @@ class Table
 
     /**
      * count the number of row
-     * @return int
      */
     public function count(): int
     {
@@ -156,8 +147,6 @@ class Table
     /**
      * Get pagination of items
      *
-     * @param int $perPage
-     * @param int $currentPage
      * @param Select|null $query = null
      * @param Select|null $countQuery = null
      *
@@ -183,7 +172,6 @@ class Table
 
     /**
      * return query for PaginatedQuery
-     * @return Select
      */
     protected function paginationQuery(): Select
     {
@@ -193,8 +181,6 @@ class Table
     /**
      * get paginated articles from an array
      *
-     * @param int $perPage
-     * @param int $currentPage
      * @param object[] $items
      *
      * @return Pagerfanta<\Pagerfanta\PagerfantaInterface>
@@ -209,11 +195,8 @@ class Table
 
     /**
      * verifiy if a value of a field already exist in the table
-     * @param string $field
-     * @param mixed $value
      * @param int|null $except
      *
-     * @return bool
      */
     public function exists(string $field, mixed $value, ?int $except = null): bool
     {
@@ -228,9 +211,7 @@ class Table
      * update a row
      *
      * @param mixed[] $params
-     * @param int $id
      *
-     * @return void
      */
     public function update(array $params, int $id): void
     {
@@ -242,7 +223,6 @@ class Table
      *
      * @param mixed[] $values
      *
-     * @return void
      */
     public function insert(array $values) : void
     {
@@ -252,9 +232,7 @@ class Table
     /**
      * delete a row
      *
-     * @param int $id
      *
-     * @return void
      */
     public function delete(int $id): void
     {
@@ -263,10 +241,9 @@ class Table
 
     /**
      * test if a record was found and return it if yes
-     * @param Select $query
      *
      * @return (E is null ? object : E)
-     * 
+     *
      * @throws NoRecordException if there is no record found
      */
     protected function fetchOrFail(Select $query): object
@@ -284,7 +261,6 @@ class Table
 
     /**
      * prepare a select query
-     * @return Select
      */
     protected function makeQuery(): Select
     {
@@ -293,7 +269,6 @@ class Table
 
     /**
      * make a count query
-     * @return Select
      */
     protected function countQuery(): Select
     {

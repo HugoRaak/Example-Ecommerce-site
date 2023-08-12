@@ -21,10 +21,7 @@ final class DatabaseAuth implements AuthInterface
 
     /**
      * login the user if it possible
-     * @param string $username
-     * @param string $password
      *
-     * @return User|null
      */
     public function login(string $username, string $password): ?User
     {
@@ -46,7 +43,6 @@ final class DatabaseAuth implements AuthInterface
 
     /**
      * logout the user
-     * @return void
      */
     public function logout(): void
     {
@@ -55,7 +51,6 @@ final class DatabaseAuth implements AuthInterface
 
     /**
      * return the current user
-     * @return User|null
      */
     public function getUser(): ?User
     {
@@ -79,7 +74,6 @@ final class DatabaseAuth implements AuthInterface
 
     /**
      * check if a user is an admin
-     * @return bool
      */
     public function isAdmin(): bool
     {

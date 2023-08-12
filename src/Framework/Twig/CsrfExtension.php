@@ -15,9 +15,7 @@ final class CsrfExtension extends AbstractExtension
 
     /**
      * generate a hidden input with information on token for the anti-csrf
-     * @param string $lock_to
      *
-     * @return string
      */
     public function formToken(string $lock_to = ''): string
     {

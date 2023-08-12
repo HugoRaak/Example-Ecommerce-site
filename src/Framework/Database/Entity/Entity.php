@@ -5,9 +5,7 @@ class Entity
 {
     /**
      * get an entity property
-     * @param string $key
      *
-     * @return mixed
      */
     public function __get(string $key): mixed
     {
@@ -20,10 +18,7 @@ class Entity
 
     /**
      * set a value to an entity property
-     * @param string $key
-     * @param mixed $value
      *
-     * @return void
      */
     public function __set(string $key, mixed $value): void
     {
@@ -35,9 +30,7 @@ class Entity
 
     /**
      * transform a key in CamelCase
-     * @param string $key
      *
-     * @return string
      */
     private function getKey(string $key): string
     {
@@ -66,11 +59,7 @@ class Entity
 
     /**
      * type casting the value in the right type for the entity
-     * @param string $key
-     * @param string $value
-     * @param object $entity
      *
-     * @return mixed
      */
     private static function typeCast(string $key, string $value, object $entity): mixed
     {

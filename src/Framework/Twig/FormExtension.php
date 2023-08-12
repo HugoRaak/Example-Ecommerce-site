@@ -18,12 +18,8 @@ final class FormExtension extends AbstractExtension
     /**
      * get a input for a form
      * @param mixed[] $context
-     * @param string $key
-     * @param mixed $value
-     * @param string $label
      * @param mixed[] $attributes
      *
-     * @return string
      */
     public function field(array $context, string $key, mixed $value, string $label = '', array $attributes = []): string
     {
@@ -63,10 +59,8 @@ final class FormExtension extends AbstractExtension
 
     /**
      * get a input
-     * @param mixed $value
      * @param mixed[] $attributes
      *
-     * @return string
      */
     private function input(mixed $value, array $attributes = []): string
     {
@@ -75,10 +69,8 @@ final class FormExtension extends AbstractExtension
 
     /**
      * get a textarea input
-     * @param mixed $value
      * @param mixed[] $attributes
      *
-     * @return string
      */
     private function textarea(mixed $value, array $attributes = []): string
     {
@@ -89,7 +81,6 @@ final class FormExtension extends AbstractExtension
      * get a file input
      * @param mixed[] $attributes
      *
-     * @return string
      */
     private function fileInput(array $attributes = []): string
     {
@@ -101,7 +92,6 @@ final class FormExtension extends AbstractExtension
      * @param int|null $value
      * @param mixed[] $attributes
      *
-     * @return string
      */
     private function selectCategories(?int $value, array $attributes = []): string
     {
@@ -125,7 +115,6 @@ final class FormExtension extends AbstractExtension
      * retrieve the different attributes for an input
      * @param mixed[] $attributes
      *
-     * @return string
      */
     private function getAttributes(array $attributes): string
     {

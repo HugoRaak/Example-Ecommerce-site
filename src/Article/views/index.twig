@@ -1,0 +1,95 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+<title>Accueil</title>
+<link href="/css/article/index.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/3.0.2/timeago.min.js" integrity="sha512-+HwB8Magvpg+0LZ4APOss9s3mopC9KUMq1/gQbCEaZ9fjSl6vWuVbvo6Nt+2dGfEqNVTZ+NVasiAfBy58kRCLg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" integrity="sha512-kjHDpsRVaJ0pxKiXH4ibysg7971Epm80gABnxVYgtMiU4fSll6NaAhzUD4NXg++ihdC160LuogIzwh2b74rP4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block content %}
+    {# <?php if(isset($_GET['error']) && $_GET['error'] === 'addpanier'): ?> 
+        <script type="text/javascript">alert('Cette article est déjà dans votre panier')</script>
+    <?php elseif(isset($_GET['error']) && $_GET['error'] === 'rmpanier'): ?>
+        <script type="text/javascript">alert('Vous ne pouvez pas retirer un article qui n\'est pas dans votre panier')</script>
+    <?php endif ?> #}
+
+    <h1 class="text-center">Accueil</h1>
+    <div class="articles">
+        <div class="arrow">
+            <button value="<" class="prev">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">
+                <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+                </svg>
+            </button>
+        </div>
+        <div id="carrousel">
+        {% for article in articles %}
+            <a href="{{pathFor('article.show', {slug: article.__get('slug'), id: article.__get('id')})}}" style="text-decoration: none;">
+                <div class="card" id="article-carrousel">
+                    <div class="row">
+                        <div class="col text-center">
+                            <img class="img-fluid" src="{{article.getImageFormat(article.showImages(), 'thumb')}}" alt="{{article.__get('name')}}">
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{article.__get('name')}}</h5>
+                        <p class="card-text">{{article.__get('price')}} €</p>
+                        <p class="text-muted">Ajouté {{article.__get('created_at')|ago}}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+        <div class="arrow">
+            <button type="button" value=">" class="next">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512" style="stroke: red; stroke-width: 2;">
+                <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        timeago().render(document.querySelectorAll('.timeago'), 'fr')
+        $(document).ready(function() {
+        $('.header').height($(window).height());
+    });
+    $(document).ready(function() {
+        var $carrousel = $('#carrousel');
+        var $cards = $carrousel.find('.card');
+        var indexCard = $cards.length - 1;
+        var i = 0;
+        var visibleCards = 3;
+
+        function showCards() {
+            $cards.hide();
+            for (var j = 0; j < visibleCards; j++) {
+                var index = (i + j) % $cards.length;
+                $cards.eq(index).show();
+            }
+            $('.prev').prop('disabled', i === 0);
+            $('.next').prop('disabled', i === indexCard - 2);
+
+            var maxHeight = Math.max.apply(null, $cards.filter(':visible').map(function() {
+                return $(this).height();
+            }).get());
+            $('svg').height(maxHeight - 50);
+        }
+
+        showCards();
+
+        $('.next').click(function() {
+            i = (i + 1) % $cards.length;
+            showCards();
+        });
+
+        $('.prev').click(function() {
+            i = (i - 1 + $cards.length) % $cards.length;
+            showCards();
+        });
+    });
+    </script>
+
+{% endblock %}

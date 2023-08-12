@@ -1,0 +1,113 @@
+<?php declare(strict_types=1);
+namespace App\Article\Actions;
+
+use Framework\Database\Table\ArticleTable;
+use Framework\Actions\RouterAware;
+use Framework\Database\Table\CategorieTable;
+use Framework\Helper;
+use Framework\Renderer\RendererInterface;
+use Framework\Router;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
+
+final class ArticleBrowseAction
+{
+    use RouterAware;
+
+    public function __construct(
+        readonly private RendererInterface $renderer,
+        readonly private Router $router,
+        readonly private ArticleTable $articleTable,
+        readonly private CategorieTable $categorieTable
+    ) {
+    }
+
+    public function __invoke(Request $request): string|ResponseInterface
+    {
+        if (strpos((string)$request->getUri(), 'recherche') !== false) {
+            return $this->search($request);
+        } elseif ($request->getAttribute('slug')) {
+            return $this->categorie($request);
+        }
+        return $this->index($request);
+    }
+
+
+    /**
+     * display all the articles
+     * @param Request $request
+     *
+     * @return string
+     */
+    private function index(Request $request): string
+    {
+        $params =  $request->getQueryParams();
+        $articles = $this->articleTable->findPaginated(12, (int)($params['p'] ?? 1));
+        return $this->renderer->render('@article/browse', $this->getRenderParams(compact('articles'), '.index'));
+    }
+
+    /**
+     * display all the articles from a categorie
+     * @param Request $request
+     *
+     * @return string
+     */
+    private function categorie(Request $request): string
+    {
+        $params =  $request->getQueryParams();
+        $slug = $request->getAttribute('slug');
+        $categorie = $this->categorieTable->findBy('slug', $slug);
+        $articles = $this->articleTable->findPaginatedFromCategorie(
+            12,
+            (int)($params['p'] ?? 1),
+            $categorie->__get('id')
+        );
+        return $this->renderer->render(
+            '@article/browse',
+            $this->getRenderParams(compact('articles', 'slug'), '.categorie')
+        );
+    }
+
+    /**
+     * display all the articles from a research
+     * @param Request $request
+     *
+     * @return string
+     */
+    private function search(Request $request): string|ResponseInterface
+    {
+        if ($request->getMethod() === 'POST') {
+            $search = $_POST['search'] ?? '';
+            if ($search === '') {
+                return $this->redirect('article.browse.index');
+            }
+            return $this->redirect('article.browse.search', ['slug' => Helper::createSlug($search, 200)]);
+        }
+        $params = $request->getQueryParams();
+        $slug = $request->getAttribute('slug');
+        $search = str_replace('-', ' ', $slug);
+        $articles = $this->articleTable->findPaginatedArray(
+            12,
+            (int)($params['p'] ?? 1),
+            $this->articleTable->getArticlesFromSearch($search)
+        );
+        return $this->renderer->render(
+            '@article/browse',
+            $this->getRenderParams(compact('articles', 'slug'), '.search')
+        );
+    }
+
+    /**
+     * get params for the render view
+     * @param mixed[] $params
+     * @param string $routeSuffix
+     *
+     * @return mixed[]
+     */
+    private function getRenderParams(array $params, string $routeSuffix): array
+    {
+        $categories = $this->categorieTable->findAll('name DESC');
+        return array_merge($params, compact('routeSuffix', 'categories'));
+    }
+}

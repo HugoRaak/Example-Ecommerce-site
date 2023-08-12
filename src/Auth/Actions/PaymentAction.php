@@ -1,0 +1,115 @@
+<?php declare(strict_types=1);
+namespace App\Auth\Actions;
+
+use App\Auth\PaypalPayment;
+use Framework\Database\Table\ArticleTable;
+use Framework\Renderer\RendererInterface;
+use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+
+use function GuzzleHttp\Psr7\stream_for;
+
+final class PaymentAction
+{
+    public function __construct(
+        readonly private RendererInterface $renderer,
+        readonly private ArticleTable $articleTable,
+        readonly private PaypalPayment $payment
+    ) {
+    }
+
+    public function __invoke(Request $request): string|Response
+    {
+        if ($request->getAttribute(('id'))) {
+            return $this->index($request);
+        } elseif (strpos((string)$request->getUri(), 'autorisation') !== false) {
+            return $this->authorization($request);
+        }
+        return $this->capture($request);
+    }
+
+    /**
+     * display the paypal button
+     * @param Request $request
+     *
+     * @return string
+     */
+    public function index(Request $request): string
+    {
+        $article = $this->articleTable->find((int)$request->getAttribute('id'));
+        $paypalButton = $this->payment->ui($article);
+        return $this->renderer->render('@auth/payment', compact('article', 'paypalButton'));
+    }
+
+    /**
+     * verify and capture paypal authorization
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function authorization(Request $request): Response
+    {
+        $params = is_array($request->getParsedBody()) ? $request->getParsedBody() : [];
+        if ($this->verifyAuthorization($params['authorizationId'])) {
+            $responseData = [
+                'status' => 'success',
+                'message' => 'Authorization verified'
+            ];
+            return (new Response(200, ['Content-Type', 'application/json'], stream_for(json_encode($responseData))));
+        } else {
+            $responseData = [
+                'status' => 'error',
+                'message' => 'Invalid authorization'
+            ];
+            return (new Response(200, ['Content-Type', 'application/json'], stream_for(json_encode($responseData))));
+        }
+    }
+
+    /**
+     * verify and capture the payment
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function capture(Request $request): Response
+    {
+        $params = is_array($request->getParsedBody()) ? $request->getParsedBody() : [];
+        if ($this->captureFunds($params['orderID'])) {
+            $responseData = [
+                'status' => 'success',
+                'message' => 'Funds captured successfully'
+            ];
+            return (new Response(200, ['Content-Type', 'application/json'], stream_for(json_encode($responseData))));
+        } else {
+            $responseData = [
+                'status' => 'error',
+                'message' => 'Failed to capture funds'
+            ];
+            return (new Response(200, ['Content-Type', 'application/json'], stream_for(json_encode($responseData))));
+        }
+    }
+
+    /**
+     * verify the parameter of authorization
+     * @param string $authorizationId
+     *
+     * @return bool
+     */
+    private function verifyAuthorization(string $authorizationId): bool
+    {
+        //TODO gestion de l'authorisation de paypal
+        return false;
+    }
+
+    /**
+     * verify parameters of the payment to capture
+     * @param string $orderID
+     *
+     * @return bool
+     */
+    private function captureFunds(string $orderID): bool
+    {
+        //TODO effectuer la capture du paiement
+        return false;
+    }
+}

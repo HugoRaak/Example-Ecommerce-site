@@ -1,0 +1,6 @@
+{{form_token()}}
+{{field('name', item.__get('name'), 'Nom :')}}
+<div class="d-flex justify-content-between">
+    {{field('slug', item.__get('slug'), 'Lien :')}}
+    <button id="slug-btn" type="button" class="btn btn-primary" onclick="generateSlug()">Générer un lien à partir du nom</button>
+</div>

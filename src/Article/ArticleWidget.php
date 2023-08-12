@@ -1,0 +1,37 @@
+<?php declare(strict_types=1);
+namespace App\Article;
+
+use App\Admin\AdminWidgetInterface;
+use Framework\Database\Table\ArticleTable;
+use Framework\Database\Table\CategorieTable;
+use Framework\Renderer\RendererInterface;
+
+final class ArticleWidget implements AdminWidgetInterface
+{
+    public function __construct(
+        readonly private RendererInterface $renderer,
+        readonly private ArticleTable $articleTable,
+        readonly private CategorieTable $categorieTable
+    ) {
+    }
+
+    /**
+     * display widget on the admin dashboard
+     * @return string
+     */
+    public function render(): string
+    {
+        $countArticle = $this->articleTable->count();
+        $countCategorie = $this->categorieTable->count();
+        return $this->renderer->render('@article/admin/widget', compact('countArticle', 'countCategorie'));
+    }
+
+    /**
+     * display the link in the admin navbar
+     * @return string
+     */
+    public function renderMenu(): string
+    {
+        return $this->renderer->render('@article/admin/menu');
+    }
+}

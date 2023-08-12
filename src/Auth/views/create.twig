@@ -1,0 +1,16 @@
+{% extends '@auth/layout.twig' %}
+
+{% block head %}<title>Créer un compte</title>{% endblock %}
+
+{% block content %}
+    <h1>Créer un compte : </h1>
+
+    <form action="" method="POST">
+    {{form_token()}}
+        {{field('username', user.__get('username'), 'Nom d\'utilisateur :')}}
+        {{field('email', user.__get('email'), 'Adresse mail :')}}
+        {{field('password', null, 'Mot de passe :', {type: 'password'})}}
+        {{field('confirm_password', null, 'Confirmez le mot de passe :', {type: 'password'})}}
+        <button type="submit" class="btn btn-success mx-auto d-block">Créer</button>
+    </form>
+{% endblock %}

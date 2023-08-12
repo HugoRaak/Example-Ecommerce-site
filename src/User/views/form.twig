@@ -1,0 +1,19 @@
+{{form_token()}}
+    {{field('name', item.__get('name'), 'Nom :')}}
+    <div class="d-flex justify-content-between">
+        {{field('slug', item.__get('slug'), 'Lien :')}}
+        <button id="slug-btn" type="button" class="btn btn-primary" onclick="generateSlug()">Générer un lien à partir du nom</button>
+    </div>
+    {{field('price', item.__get('price'), 'Prix :', {type: 'number', step: '0.1'})}}
+    {{field('images[]', null, 'Images :', {type: 'file', accept: 'image/*', multiple: true})}}
+    {% for image in images %}
+        {% if image is not empty %}
+            <img src="{{item.getImageFormat(image, 'thumb')}}" alt="{{item.__get('name')}}">
+        {% endif %}
+    {% endfor %}
+    {{field('description', item.__get('description'), 'Description :', {type: 'textarea', rows: '6'})}}
+    {{field('categorie_id', item.__get('categorie_id'), 'Catégorie :', {
+        type: 'select',
+        values: categories,
+        class: 'form-select'
+    })}}

@@ -1,0 +1,43 @@
+{% extends '@admin/layout.twig' %}
+
+{% block head %}
+<title>Utilisateurs</title>
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Utilisateurs : </h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td class="align-middle text-center">Nom</td>
+                <td class="align-middle text-center">Email</td>
+                <td class="align-middle text-center">Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td class="align-middle text-center">{{user.__get('username')}}</td>
+                    <td class="align-middle text-center">{{user.__get('email')}}</td>
+                    <td class="d-flex justify-content-center justify-content-middle">
+                            <form class="mx-4" action="{{pathFor('admin.user.delete', {id: user.__get('id')})}}" method="post" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cette utilisateur');">
+                                {{form_token(pathFor('admin.user.delete', {id: user.__get('id')}))}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </form>
+                            <form action="{{pathFor('admin.user.addRole', {id: user.__get('id')})}}" method="post">
+                                {{form_token(pathFor('admin.user.addRole', {id: user.__get('id')}))}}
+                                <div class="d-flex justify-content-start">
+                                    {{field('role_id', user.__get('role_id'), '', {type: 'select', values: roles, class: 'form-select'})}}
+                                    <button class="btn btn-primary mx-2">Modifier</button>
+                                </div>
+                            </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ paginateExtension(users, 'admin.user.index') }}
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+<title>{{ article.__get('name') }}</title>
+<link href="/css/article/show.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/3.0.2/timeago.min.js" integrity="sha512-+HwB8Magvpg+0LZ4APOss9s3mopC9KUMq1/gQbCEaZ9fjSl6vWuVbvo6Nt+2dGfEqNVTZ+NVasiAfBy58kRCLg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" integrity="sha512-kjHDpsRVaJ0pxKiXH4ibysg7971Epm80gABnxVYgtMiU4fSll6NaAhzUD4NXg++ihdC160LuogIzwh2b74rP4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="article-container">
+        <div class="article-img">
+            {% for image in article.showImages(false) %}
+                <div class="photo">
+                    <img src="{{article.getImageFormat(image, 'thumb')}}" alt="{{article.__get('name')}}">
+                </div>
+            {% endfor %}
+        </div>
+        <div class="article-info">
+            <div class="row">
+                <div class="col">
+                    <h4 class="name">{{article.__get('name')}}</h4>
+                </div>
+                {% if paymentActive %}
+                <div class="col">
+                    <form action="{{pathFor('pay', {id: article.__get('id')})}}" method="post">
+                    {{form_token(pathFor('pay', {id: article.__get('id')}))}}
+                        <button type="submit" class="btn btn-outline-dark">Acheter</button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+            <p class="text-muted">Ajouté {{article.__get('created_at')|ago}}</p>
+            <p class="price">Prix : {{article.__get('price')}} €</p>
+            <p class="description">Description : {{article.__get('description')|nl2br}}</p>
+            {% if categorie.__get('slug') is not same as(null) %}
+            <p class="p_category">Catégorie : 
+                <a href="{{pathFor('article.browse.categorie', {slug: categorie.__get('slug')})}}">
+                    <span class="category">{{categorie.__get('name')}}</span>
+                </a>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        timeago().render(document.querySelectorAll('.timeago'), 'fr')
+    </script>
+{% endblock %}

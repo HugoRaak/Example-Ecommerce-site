@@ -1,0 +1,40 @@
+.row {
+    padding-top: 10px;
+}
+
+a.btn-right {
+    margin-left: auto;
+}
+
+.category {
+    margin-top: 10px;
+    display: inline-block;
+    margin-right: 5px;
+    padding: 6px 10px;
+    background-color: #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-flex;
+    text-decoration: none;
+    color: black;
+}
+
+.category:hover {
+    text-decoration: underline;
+}
+
+.btn-search {
+    margin-left: 10px;
+}
+
+.card {
+    border: 1.5px solid rgb(125, 125, 125);
+    transition: all 0.1s;
+}
+
+.card:hover {
+    border : 1.5px solid #000000;
+    box-shadow: 8px 8px 10px 0 rgba(0,0,0,0.5);
+}

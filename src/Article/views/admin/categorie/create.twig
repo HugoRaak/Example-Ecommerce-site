@@ -1,0 +1,29 @@
+{% extends '@admin/layout.twig' %}
+
+{% block head %}
+<title>Ajouter une categorie</title>
+<link href="/css/form.css" rel="stylesheet" type="text/css"/>
+<script>
+    function generateSlug() {
+        var name = document.getElementsByName('name')[0].value;
+        var slugInput = document.getElementsByName('slug')[0];
+
+        var slug = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        var slug = slug.replace(/[^\w ]+/g, ' ');
+        var slug = slug.trim();
+        var slug = slug.replace(/_/g, '');
+        slug = slug.replace(/ +/g, '-');
+        slugInput.value = slug.toLowerCase();
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+    <h1>Ajouter une catégorie : </h1>
+
+    <form action="" method="post" class="form">
+        {% include "@article/admin/categorie/form.twig" %}
+        <button type="submit" class="btn btn-success mx-auto d-block">Ajouter</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends '@admin/layout.twig' %}
+
+{% block head %}
+<title>Dashboard</title>
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Dashboard</h1>
+
+    <div class="row">
+        <div class="col-sm-4 text-center mx-auto mt-3">
+            {{widgets|raw}}
+        </div>
+    </div>
+
+{% endblock %}

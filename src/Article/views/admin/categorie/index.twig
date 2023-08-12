@@ -1,0 +1,33 @@
+{% extends '@admin/layout.twig' %}
+
+{% block head %}
+<title>Categories</title>
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Catégories : </h1>
+
+    <table class="table table-striped">
+        <thead>
+            <td class="align-middle text-center">Nom</td>
+            <td class="align-middle text-center"><a href="{{pathFor('admin.categorie.add')}}" class="btn btn-success">Ajouter une catégorie</a></td>
+        </thead>
+        <tbody>
+            {% for categorie in items %}
+                <tr>
+                    <td class="align-middle text-center">{{categorie.__get('name')}}</td>
+                    <td class="align-middle text-center">
+                        <a href="{{pathFor('admin.categorie.edit', {id: categorie.__get('id')})}}" class="btn btn-primary">Modifier</a>
+                        <form style="display: inline;" action="{{pathFor('admin.categorie.delete', {id: categorie.__get('id')})}}" method="post" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cette catégorie');">
+                            {{form_token(pathFor('admin.categorie.delete', {id: categorie.__get('id')}))}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ paginateExtension(items, 'admin.categorie.index') }}
+
+{% endblock %}

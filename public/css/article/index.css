@@ -1,0 +1,51 @@
+.articles {
+    padding-top: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.card img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+#carrousel {
+    width: fit-content;
+    display: flex;
+}
+
+.card {
+    width: 200px;
+    height: 600px;
+    flex: 0 0 200px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid rgb(125, 125, 125);
+    transition: all 0.1s;
+}
+
+.card:hover {
+    border : 1px solid #000000;
+    box-shadow: 8px 8px 10px 0 rgba(0,0,0,0.5);
+}
+
+.prev {
+    margin-right: 10px;
+}
+
+.arrow button {
+    background-color: #ffffff;
+    border-color: #c5c5c5;
+    border-width: 1.5px;
+}
+
+.arrow svg {
+    width: 40px;
+    fill: #4f4d4d;
+}

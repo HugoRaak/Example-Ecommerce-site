@@ -1,0 +1,17 @@
+{% extends '@auth/layout.twig' %}
+
+{% block head %}<title>Se connecter</title>{% endblock %}
+
+{% block content %}
+    <h1>Se connecter : </h1>
+
+    <form action="" method="POST">
+    {{form_token()}}
+        {{field('username', null, 'Nom d\'utilisateur :')}}
+        {{field('password', null, 'Mot de passe :', {type: 'password'})}}
+        <button type="submit" class="btn btn-success mx-auto d-block">Se connecter</button>
+    </form>
+    <div class="text-center mb-4">
+        <small>Vous n'avez pas de compte ? <a href="{{pathFor('auth.create')}}">Créer un compte</a></small>
+    </div>
+{% endblock %}

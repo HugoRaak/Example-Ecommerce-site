@@ -1,0 +1,59 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+<title>Mon compte</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/3.0.2/timeago.min.js" integrity="sha512-+HwB8Magvpg+0LZ4APOss9s3mopC9KUMq1/gQbCEaZ9fjSl6vWuVbvo6Nt+2dGfEqNVTZ+NVasiAfBy58kRCLg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" integrity="sha512-kjHDpsRVaJ0pxKiXH4ibysg7971Epm80gABnxVYgtMiU4fSll6NaAhzUD4NXg++ihdC160LuogIzwh2b74rP4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Mon Compte</h1>
+
+    {% if items is not empty %}
+
+    <div class="mes-articles mt-4">
+        <h4>Mes articles :</h4>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <td class="align-middle text-center">Photo</td>
+                <td class="align-middle text-center">Nom</td>
+                <td class="align-middle text-center">Prix</td>
+                <td class="align-middle text-center">Description</td>
+                <td class="align-middle text-center">Date de modification</td>
+                <td class="align-middle text-center"><a href="{{pathFor('user.article.add')}}" class="btn btn-success">Vendre un article</a></td>
+            </thead>
+            <tbody>
+                {% for article in items %}
+                    <tr>
+                        <td class="align-middle text-center"><img src="{{article.getImageFormat(article.showImages(), 'icon')}}" alt="{{article.__get('name')}}"></td>
+                        <td class="align-middle">{{article.__get('name')}}</td>
+                        <td class="align-middle">{{article.__get('price')}} €</td>
+                        <td class="align-middle">{{article.__get('description')|nl2br|exerpt}}</td>
+                        <td class="align-middle"><p class="text-muted">Modifié {{article.__get('updated_at')|ago}}</p></td>
+                        <td class="align-middle text-center">
+                            <a href="{{pathFor('user.article.edit', {id: article.__get('id')})}}" class="btn btn-primary">Modifier</a>
+                            <form action="{{pathFor('user.article.delete', {id: article.__get('id')})}}" method="post" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cette article');">
+                            {{form_token(pathFor('user.article.delete', {id: article.__get('id')}))}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {{ paginateExtension(items, 'user.article.index') }}
+
+    <script>
+        timeago().render(document.querySelectorAll('.timeago'), 'fr')
+    </script>
+
+    {% else %}
+    <div class="text-center">
+        <p class="mt-4"><b>Vous n'avez aucun article en vente</b></p>
+        <a href="{{pathFor('user.article.add')}}" class="btn btn-success">Vendre un article</a>
+    </div>
+    {% endif %}
+
+{% endblock %}

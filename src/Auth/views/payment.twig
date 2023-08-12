@@ -1,0 +1,25 @@
+{% extends "@auth/layout.twig" %}
+
+{% block head %}
+<title>Procéder au payement</title>
+{% endblock %}
+
+{% block content %}
+    <div class="card horizontal-card">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{article.getImageFormat(article.showImages(), 'thumb')}}" class="card-img" alt="{{article.__get('name')}}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{article.__get('name')}}</h5>
+                    <p class="card-title">{{article.__get('description')|nl2br|exerpt()}}</p>
+                    <p class="card-text">{{article.__get('price')}} €</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4 mb-4">
+        {{paypalButton|raw}}
+    </div>
+{% endblock %}

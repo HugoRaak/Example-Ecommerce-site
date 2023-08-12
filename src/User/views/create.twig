@@ -1,0 +1,30 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+<title>Vendre un article</title>
+<link href="/css/form.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+    <h1>Création de l'article : </h1>
+
+    <form action="" method="post" class="form" enctype="multipart/form-data">
+        {% include "@user/form.twig" %}
+        <button type="submit" class="btn btn-success mx-auto d-block">Mettre en vente</button>
+    </form>
+
+    <script>
+        function generateSlug() {
+            var name = document.getElementsByName('name')[0].value;
+            var slugInput = document.getElementsByName('slug')[0];
+
+            var slug = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            var slug = slug.replace(/[^\w ]+/g, ' ');
+            var slug = slug.trim();
+            var slug = slug.replace(/_/g, '');
+            slug = slug.replace(/ +/g, '-');
+            slugInput.value = slug.toLowerCase();
+        }
+    </script>
+
+{% endblock %}

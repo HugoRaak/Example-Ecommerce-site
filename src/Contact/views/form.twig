@@ -1,0 +1,20 @@
+{% extends "layout.twig" %}
+
+{% block head %}
+<title>Contact</title>
+<link href="/css/form.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+    <h1>Nous contacter : </h1>
+
+    <form action="" method="POST">
+    {{form_token()}}
+        {{field('name', mailInfo.name, 'Nom :')}}
+        {{field('email', mailInfo.email, 'Adresse mail :')}}
+        {{field('object', mailInfo.object, 'Objet :')}}
+        {{field('message', mailInfo.message, 'Message :', {type: 'textarea', rows: '6'})}}
+        <button type="submit" class="btn btn-success mx-auto d-block">Envoyer</button>
+    </form>
+
+{% endblock %}

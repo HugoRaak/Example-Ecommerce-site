@@ -48,6 +48,6 @@ $app->pipe(DispatcherMiddleware::class);
 
 if (php_sapi_name() !== 'cli') {
     /** @var \Psr\Http\Message\ResponseInterface $response */
-    $response = $app->run(\GuzzleHttp\Psr7\ServerRequest::fromGlobals());
+    $response = $app->run(\GuzzleHttp\Psr7\ServerRequest::fromGlobals()->withHeader('X-Frame-Options', 'SAMEORIGIN'));
     \Http\Response\send($response);
 }

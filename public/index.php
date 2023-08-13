@@ -11,6 +11,7 @@ use App\Contact\ContactModule;
 use App\User\UserModule;
 use Dotenv\Dotenv;
 use Framework\Middleware\DispatcherMiddleware;
+use Middlewares\Whoops;
 
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
@@ -23,6 +24,13 @@ $app = (new \Framework\App(dirname(__DIR__) . '/config/config.php'))
     ->addModule(ContactModule::class);
 
 $container = $app->getContainer();
+
+if($_ENV['ENV'] === 'dev') {
+    $app->pipe(Whoops::class);
+} else {
+    error_reporting(0);
+}
+
 foreach ($container->get('middlewares') as $middleware) {
     if (is_array($middleware)) {
         if (count($middleware) > 2) {

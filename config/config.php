@@ -19,7 +19,6 @@ use Framework\Twig\{
     CurrentPathExtension,
     LayoutBuilderExtension
 };
-use Middlewares\Whoops;
 use ParagonIE\AntiCSRF\AntiCSRF;
 
 use function DI\{autowire, factory, get};
@@ -33,7 +32,6 @@ return [
     'views.path' => dirname(__DIR__) . '/views',
     'path.save.prefix' => '/helper/path/save',
     'middlewares' => [
-        Whoops::class,
         TrailingSlashMiddleware::class,
         NotFoundMiddleware::class,
         MethodMiddleware::class,

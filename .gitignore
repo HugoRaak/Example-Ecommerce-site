@@ -1,5 +1,6 @@
 tests/
 vendor/
+tmp/
 .vscode/
 *.tmp
 *.cache

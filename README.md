@@ -27,8 +27,8 @@ My project follows a modular structure to improve maintainability and scalabilit
 ## Technology Stack
 My E-Commerce website is built using the following technologies:
 
-- Backend: PHP with a homemade framework
-- Frontend: HTML, CSS, JavaScript (ES6), and a frontend framework (e.g., React, Vue.js).
+- Backend: PHP with a homemade framework.
+- Frontend: HTML, CSS, JavaScript (ES6).
 - Database: MySQL for data storage.
 - Version Control: Git for source code management.
 

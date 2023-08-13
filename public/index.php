@@ -25,7 +25,7 @@ $app = (new \Framework\App(dirname(__DIR__) . '/config/config.php'))
 
 $container = $app->getContainer();
 
-if($_ENV['ENV'] === 'dev') {
+if ($_ENV['ENV'] === 'dev') {
     $app->pipe(Whoops::class);
 } else {
     error_reporting(0);

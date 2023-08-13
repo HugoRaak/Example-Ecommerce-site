@@ -11,6 +11,7 @@ parameters:
     ignoreErrors:
         - '#^Method .* should return Psr\\Http\\Message\\ResponseInterface but returns Psr\\Http\\Message\\MessageInterface\.$#'
         - '#^Parameter \#1 \$request of method Psr\\Http\\Server\\RequestHandlerInterface\:\:handle\(\) expects Psr\\Http\\Message\\ServerRequestInterface, Psr\\Http\\Message\\RequestInterface given\.$#'
+        - '#Parameter \#1 \$request of method Framework\\App::run\(\) expects Psr\\Http\\Message\\ServerRequestInterface, Psr\\Http\\Message\\MessageInterface given\.$#'
         - '#^Condition "E of Framework\\Database\\Entity\\Entity is null" in conditional return type is always false\.$#'
         - '#^Unable to resolve the template type T in call to method static method Framework\\Database\\Entity\\Entity::hydrate\(\)#'
         - '#^Call to an undefined method T of object::__set\(\)#'

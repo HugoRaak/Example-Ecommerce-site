@@ -29,9 +29,9 @@ final class ArticleTable extends Table
     /**
      * Find articles of a user
      *
-     * @return mixed
+     * @return Article[]
      */
-    public function findArticleFromUser(int $id, ?string $orderBy = null)
+    public function findArticleFromUser(int $id, ?string $orderBy = null): array
     {
         $query = $this->makeQuery()->where('user.id', $id)->select('article.*');
         if ($orderBy) {

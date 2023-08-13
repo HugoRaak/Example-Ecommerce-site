@@ -1,6 +1,7 @@
 tests/
 vendor/
 tmp/
+public/uploads/
 .vscode/
 *.tmp
 *.cache

@@ -8,8 +8,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
         __DIR__ . '/src',
         __DIR__ . '/public',
-        __DIR__ . '/config',
-        __DIR__ . '/views',
+        __DIR__ . '/config'
     ]);
     
     //I have some problmes with rector and phpstan I didn't success to resolve them otherwise than that

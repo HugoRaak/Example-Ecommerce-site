@@ -6,7 +6,9 @@ namespace App\Auth\Actions;
 
 use App\Auth\Database\Table\RoleTable;
 use App\Auth\Database\Table\UserTable;
+use App\User\UserUpload;
 use Framework\Actions\RouterAware;
+use Framework\Database\Table\ArticleTable;
 use Framework\Renderer\RendererInterface;
 use Framework\Router;
 use Framework\Session\FlashService;
@@ -22,7 +24,9 @@ final readonly class AdminUserAction
         private Router $router,
         private UserTable $userTable,
         private FlashService $flash,
-        private RoleTable $roleTable
+        private RoleTable $roleTable,
+        private ArticleTable $articleTable,
+        private UserUpload $userUpload
     ) {
     }
 
@@ -54,7 +58,16 @@ final readonly class AdminUserAction
      */
     private function delete(Request $request): ResponseInterface
     {
-        $this->userTable->delete((int)$request->getAttribute('id'));
+        $userId = (int)$request->getAttribute('id');
+        foreach ($this->articleTable->findArticleFromUser($userId) as $article) {
+            $images = $article->showImages(false);
+            if ($images) {
+                foreach (is_array($images) ? $images : [] as $image) {
+                    $this->userUpload->delete($image);
+                }
+            }
+        }
+        $this->userTable->delete($userId);
         $this->flash->success('L\'utilisateur a été supprimer avec succès');
         return $this->redirect('admin.user.index');
     }

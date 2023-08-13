@@ -9,7 +9,8 @@ use Framework\Twig\{
     TextExtension,
     TimeExtension,
     FlashExtension,
-    CurrentPathExtension
+    CurrentPathExtension,
+    LayoutBuilderExtension
 };
 use ParagonIE\AntiCSRF\AntiCSRF;
 
@@ -32,7 +33,8 @@ return [
         get(FormExtension::class),
         get(FlashExtension::class),
         get(CsrfExtension::class),
-        get(CurrentPathExtension::class)
+        get(CurrentPathExtension::class),
+        get(LayoutBuilderExtension::class)
     ],
     SessionInterface::class => autowire(PHPSession::class),
     AntiCSRF::class => function () {

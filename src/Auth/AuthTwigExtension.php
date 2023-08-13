@@ -20,7 +20,7 @@ final class AuthTwigExtension extends AbstractExtension
     {
         return [
             new \Twig\TwigFunction('current_user', $this->auth->getUser(...)),
-            new \Twig\TwigFunction('is_admin', fn() => $this->auth->isAdmin()),
+            new \Twig\TwigFunction('is_admin', fn() => $this->auth->isAdmin())
         ];
     }
 }

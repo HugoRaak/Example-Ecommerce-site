@@ -8,25 +8,11 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" href="{{ pathFor('article.index') }}">
-			<img class="rotation" src="/img/logo.png" alt="Logo Agora Francia" height="70" width="70">
-		</a>
+		{{get_navbar_logo()}}
 		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-				<a class="nav-link {{is_subpath('article.index') ? 'active'}}" href="{{ pathFor('article.index') }}">Accueil</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link {{is_subpath('article.browse.index') ? 'active'}}" href="{{pathFor('article.browse.index')}}">Parcourir</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link {{is_subpath('contact') ? 'active'}}" href="{{pathFor('contact')}}">Contact</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link {{is_subpath('user.article.index') ? 'active'}}" href="{{ pathFor('user.article.index') }}">Compte</a>
-			</li>
-			</ul>
+			{{get_navbar_link()}}
 
+			{% if is_there_auth() %}
 			{% if current_user() %}
 				<div class="nav-item ms-auto text-center" style="margin-right: 30px;">
 					<div class="navbar-text text-white">Connecté en tant que {{current_user().__get('username')}}</div>
@@ -50,15 +36,16 @@
 					</form>
 				</div>
 			{% endif %}
+			{% endif %}
 		</div>
 	</nav>
-	
+
 
 	<div class="container mt-4" id="content">
 		{% include "flash.twig" %}
 		{% block content %}{% endblock %}
 	</div>
-	
+
 	{% include "footer.twig" %}
 </body>
 </html>

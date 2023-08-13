@@ -15,14 +15,7 @@
 				</li>
 				{{admin_menu()}}
 			</ul>
-			<ul class="navbar-nav ms-auto mt-2">
-				<li class="nav-item">
-					<form action="{{pathFor('auth.logout')}}" method="POST">
-					{{form_token(pathFor('auth.logout'))}}
-						<button type="submit" class="btn btn-danger mr-auto">Se déconnecter</button>
-					</form>
-				</li>
-			</ul>
+			{{logout_button()}}
 		</div>
 	</nav>
 

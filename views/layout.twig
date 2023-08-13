@@ -10,33 +10,11 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		{{get_navbar_logo()}}
 		<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav ml-auto">
 			{{get_navbar_link()}}
+		</ul>
 
-			{% if is_there_auth() %}
-			{% if current_user() %}
-				<div class="nav-item ms-auto text-center" style="margin-right: 30px;">
-					<div class="navbar-text text-white">Connecté en tant que {{current_user().__get('username')}}</div>
-					<div class="d-flex justify-content-center">
-						{% if is_admin() %}
-							<a href="{{pathFor('admin')}}"><button type="submit" class="btn btn-outline-light mr-auto">Administration</button></a>
-						{% endif %}
-						<form action="{{pathFor('auth.logout')}}" method="POST" onsubmit="return confirm('Etes-vous sur de vouloir vous déconnecter');">
-						{{form_token(pathFor('auth.logout'))}}
-							<input type="hidden" name="save_uri" value="{{current_path()}}">
-							<button type="submit" class="btn btn-danger mr-auto mx-2">Se déconnecter</button>
-						</form>
-					</div>
-				</div>
-			{% else %}
-				<div class="nav-item ms-auto" style="margin-right: 30px;">
-					<form action="{{pathFor('auth.login')}}" method="post">
-					{{form_token(pathFor('auth.login'))}}
-						<input type="hidden" name="save_uri" value="{{current_path()}}">
-						<button type="submit" class="btn btn-outline-light">Se connecter | Créer un compte</button>
-					</form>
-				</div>
-			{% endif %}
-			{% endif %}
+			{{get_login_button()}}
 		</div>
 	</nav>
 

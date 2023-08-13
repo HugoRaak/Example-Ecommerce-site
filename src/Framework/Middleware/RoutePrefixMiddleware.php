@@ -29,7 +29,7 @@ final readonly class RoutePrefixMiddleware implements MiddlewareInterface
     {
         $path = $request->getUri()->getPath();
         foreach ($this->routePrefix as $routePrefix) {
-            if (str_starts_with($path, $routePrefix)) {
+            if ($routePrefix !== null && str_starts_with($path, $routePrefix)) {
                 return $this->container->get($this->middleware)->process($request, $handler);
             }
         }

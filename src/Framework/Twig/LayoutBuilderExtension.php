@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Framework\Twig;
 
+use Framework\Renderer\RendererInterface;
 use Framework\Router;
-use PHP_CodeSniffer\Generators\HTML;
 use Psr\Container\ContainerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class LayoutBuilderExtension extends AbstractExtension
 {
-    public function __construct(readonly private ContainerInterface $container, readonly private Router $router)
-    {
+    public function __construct(
+        readonly private ContainerInterface $container,
+        readonly private Router $router,
+    ) {
     }
 
     public function getFunctions(): array
@@ -21,7 +23,7 @@ final class LayoutBuilderExtension extends AbstractExtension
         return [
             new TwigFunction('get_navbar_logo', $this->getNavbarLogo(...), ['is_safe' => ['html']]),
             new TwigFunction('get_navbar_link', $this->getNavbarLink(...), ['is_safe' => ['html']]),
-            new TwigFunction('is_there_auth', $this->isThereAuth(...))
+            new TwigFunction('get_login_button', $this->getLoginButton(...), ['is_safe' => ['html']])
         ];
     }
 
@@ -30,13 +32,14 @@ final class LayoutBuilderExtension extends AbstractExtension
      */
     public function getNavbarLogo(): string
     {
-        if($this->container->has('article.prefix')) 
+        if ($this->container->has('article.prefix')) {
             return <<<HTML
             <a class="navbar-brand" href="{$this->router->getUri('article.index')}">
                 <img class="rotation" src="/img/logo.png" alt="Logo Agora Francia" height="70" width="70">
             </a>
             HTML;
-        
+        }
+
         return <<<HTML
         <img class="rotation" src="/img/logo.png" alt="Logo Agora Francia" height="70" width="70">
         HTML;
@@ -48,61 +51,26 @@ final class LayoutBuilderExtension extends AbstractExtension
     public function getNavbarLink(): string
     {
         $navbar = '';
-        if($this->container->has('article.prefix')) {
-            $isActiveIndex = str_contains(
-                $_SERVER['REQUEST_URI'] ?? '/',
-                $this->router->getUri('article.index')
-            ) ? 'active' : '';
-            $isActiveBrowse = str_contains(
-                $_SERVER['REQUEST_URI'] ?? '/',
-                $this->router->getUri('article.browse.index')
-            ) ? 'active' : '';
-            $navbar .= <<<HTML
-                <li class="nav-item">
-                    <a class="nav-link {$isActiveIndex}" 
-                    href="{$this->router->getUri('article.index')}">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {$isActiveBrowse}" 
-                    href="{$this->router->getUri('article.browse.index')}">Parcourir</a>
-                </li>
-            HTML;
+        if ($this->container->has('article.prefix')) {
+            $navbar .= $this->container->get(RendererInterface::class)->render('@article/navbar_link');
         }
-        if($this->container->has('contact.prefix')) {
-            $isActive = str_contains(
-                $_SERVER['REQUEST_URI'] ?? '/',
-                $this->router->getUri('contact')
-            ) ? 'active' : '';
-            $navbar .= <<<HTML
-                <li class="nav-item">
-                    <a class="nav-link {$isActive}" 
-                    href="{$this->router->getUri('contact')}">Contact</a>
-                </li>
-            HTML;
+        if ($this->container->has('contact.prefix')) {
+            $navbar .= $this->container->get(RendererInterface::class)->render('@contact/navbar_link');
         }
-        if($this->container->has('user.prefix')) {
-            $isActive = str_contains(
-                $_SERVER['REQUEST_URI'] ?? '/',
-                $this->router->getUri('user.article.index')
-            ) ? 'active' : '';
-            $navbar .= <<<HTML
-                <li class="nav-item">
-                    <a class="nav-link {$isActive}" 
-                    href="{$this->router->getUri('user.article.index')}">Compte</a>
-                </li>
-            HTML;
+        if ($this->container->has('user.prefix') && $this->container->has('auth.login')) {
+            $navbar .= $this->container->get(RendererInterface::class)->render('@user/navbar_link');
         }
-        return <<<HTML
-        <ul class="navbar-nav ml-auto">
-            {$navbar}
-        </ul>
-        HTML;
+        return $navbar;
     }
 
     /**
-     * Check if auth module is actived
+     * if auth module is actived render login button
      */
-    public function isThereAuth(): bool {
-        return $this->container->has('auth.login');
+    public function getLoginButton(): string
+    {
+        if ($this->container->has('auth.login')) {
+            return $this->container->get(RendererInterface::class)->render('@auth/login_button');
+        }
+        return '';
     }
 }

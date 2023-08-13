@@ -1,5 +1,12 @@
 <?php
 
+use Framework\Middleware\{
+    CsrfMiddleware,
+    MethodMiddleware,
+    NotFoundMiddleware,
+    RouterMiddleware,
+    TrailingSlashMiddleware
+};
 use Framework\Renderer\{TwigRendererFactory, RendererInterface};
 use Framework\Session\{SessionInterface, PHPSession};
 use Framework\Twig\{
@@ -12,6 +19,7 @@ use Framework\Twig\{
     CurrentPathExtension,
     LayoutBuilderExtension
 };
+use Middlewares\Whoops;
 use ParagonIE\AntiCSRF\AntiCSRF;
 
 use function DI\{autowire, factory, get};
@@ -24,6 +32,14 @@ return [
     'database.name' => 'agora-francia',
     'views.path' => dirname(__DIR__) . '/views',
     'path.save.prefix' => '/helper/path/save',
+    'middlewares' => [
+        Whoops::class,
+        TrailingSlashMiddleware::class,
+        NotFoundMiddleware::class,
+        MethodMiddleware::class,
+        CsrfMiddleware::class,
+        RouterMiddleware::class
+    ],
     'twig.extensions' => [
         get(\Framework\Router\RouterTwigExtension::class),
         get(\Twig\Extension\DebugExtension::class),

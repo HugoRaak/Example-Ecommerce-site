@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Framework;
 
+use Psr\Container\ContainerInterface;
+
 class Helper
 {
     /**
@@ -40,5 +42,16 @@ class Helper
             return mb_substr($slug, 0, $lastSpace);
         }
         return $slug;
+    }
+
+    /**
+     * return a container definition if exists else default
+     */
+    public static function containerGetOrDefault(
+        ContainerInterface $container,
+        string $id,
+        mixed $default = null
+    ): mixed {
+        return $container->has($id) ? $container->get($id) : $default;
     }
 }

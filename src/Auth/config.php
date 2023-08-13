@@ -1,7 +1,12 @@
 <?php
 
+use App\Auth\Middleware\AdminMiddleware;
 use App\Auth\Middleware\ForbiddenMiddleware;
+use App\Auth\Middleware\LoggedInMiddleware;
+use App\Auth\Middleware\OwnedMiddleware;
 use App\Auth\UserWidget;
+use Framework\Helper;
+use Psr\Container\ContainerInterface;
 
 use function DI\autowire;
 use function DI\get;
@@ -17,5 +22,18 @@ return [
     ]),
     'admin.widgets' => add([
         get(UserWidget::class)
-    ])
+    ]),
+    'middlewares' => add([(fn(ContainerInterface $c) => [
+            ForbiddenMiddleware::class,
+            [LoggedInMiddleware::class, [
+                Helper::containerGetOrDefault($c, 'user.prefix'),
+                Helper::containerGetOrDefault($c, 'admin.prefix'),
+                Helper::containerGetOrDefault($c, 'pay.prefix')
+            ]],
+            [OwnedMiddleware::class, [
+                Helper::containerGetOrDefault($c, 'user.edit.prefix'),
+                Helper::containerGetOrDefault($c, 'user.delete.prefix')
+            ]],
+            [AdminMiddleware::class, [Helper::containerGetOrDefault($c, 'admin.prefix')]]
+        ])])
 ];

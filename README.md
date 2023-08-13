@@ -19,7 +19,7 @@ My project follows a modular structure to improve maintainability and scalabilit
 
 - `src`: Contains the application's source code.
   - `Framework`: its the heart of my application, providing the essential tools and components to make the entire system work seamlessly.
-  - `modules`: Definition of different module each module are independant and can be commented in index.php
+  - `modules`: Definition of different module each module are independant and can be add or not in `public/index.php`
 - `public`: Houses static assets like images, CSS
 - `views`: Contains templates used by the modules views.
 - `config`: Stores configuration file for php-di container

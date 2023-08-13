@@ -11,7 +11,6 @@ use Framework\Helper;
 use Framework\Renderer\RendererInterface;
 use Framework\Router;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 final readonly class ArticleBrowseAction

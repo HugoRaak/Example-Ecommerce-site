@@ -53,7 +53,7 @@ To start working on the project, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/HugoRaak/Example-Ecommerce-site.git`
 2. Install the required dependencies: `composer install`.
-3. Configure the environment variables according to the `.env` file.
+3. Configure the environment variables in the `.env` file.
 4. Run the development server: `php -S localhost:8000 -t public`.
 
 ## Contributing

@@ -51,7 +51,7 @@ My controllers leverage Twig to render views, passing dynamic data to templates 
 ## Getting Started
 To start working on the project, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/HugoRaak/Example-Ecommerce-site.git`
+1. Clone the repository: `git clone https://github.com/HugoRaak/agora-francia.git`
 2. Install the required dependencies: `composer install`.
 3. Configure the environment variables in the `.env` file.
 4. Run the development server: `php -S localhost:8000 -t public`.
